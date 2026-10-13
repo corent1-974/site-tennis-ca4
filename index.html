@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deux gestes, un projet de jeu — Tennis CA4</title>
+<meta name="description" content="Site d'accompagnement EPS cycle 4 (CA4, tennis) : le service et le smash. Projet de Corentin Bernier et Tom Agnan.">
+<meta name="author" content="Corentin Bernier & Tom Agnan">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23D9E85B'/%3E%3Cpath d='M10 14c14 10 14 26 0 36M54 14c-14 10-14 26 0 36' fill='none' stroke='%23fff' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16211C;--muted:#5B6A62;--court:#1F4D36;--court-2:#2E6A4C;--clay:#C2502F;--clay-2:#A23F22;
+  --ball:#D9E85B;--cream:#F7F5EE;--paper:#FFFFFF;--line:#E3DFD2;--soft:#EEF3EF;
+  --radius:18px;--shadow:0 1px 2px rgba(22,33,28,.06),0 8px 24px rgba(22,33,28,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;color:var(--court);margin:0 0 .4em;line-height:1.15;letter-spacing:-.01em}
+a{color:var(--clay)}
+img,video{max-width:100%;display:block;border-radius:12px}
+
+/* ----- En-tête + onglets ----- */
+header.top{position:sticky;top:0;z-index:20;background:var(--court);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+.top-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:1.05rem;white-space:nowrap;color:#fff;background:none;border:0;cursor:pointer;padding:0}
+.brand .dot{width:26px;height:26px;border-radius:50%;background:var(--ball);position:relative;flex:none}
+.brand .dot::before,.brand .dot::after{content:"";position:absolute;top:3px;bottom:3px;width:10px;border:2px solid #fff;border-radius:50%}
+.brand .dot::before{left:-5px;border-left-color:transparent;border-top-color:transparent;border-bottom-color:transparent}
+.brand .dot::after{right:-5px;border-right-color:transparent;border-top-color:transparent;border-bottom-color:transparent}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{color:#E6EEE9;text-decoration:none;font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:999px;white-space:nowrap;transition:background .15s}
+nav.tabs a:hover{background:var(--court-2)}
+nav.tabs a.on{background:var(--ball);color:var(--court);font-weight:600}
+
+/* ----- Mise en page ----- */
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 88px}
+.page{display:none;animation:fade .25s ease}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:var(--court);font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:18px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ball);box-shadow:0 0 0 2px var(--court)}
+h1{font-size:clamp(2rem,5vw,3rem)}
+h2{font-size:1.45rem;margin-top:2.6em;display:flex;align-items:center;gap:12px}
+h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(--clay);border:1.5px solid var(--clay);border-radius:999px;padding:2px 9px}
+.lede{font-size:1.15rem;color:var(--muted);max-width:62ch}
+
+/* ----- Accueil ----- */
+.hero{background:linear-gradient(160deg,var(--court) 0%,#173B29 100%);color:#fff;border-radius:28px;padding:44px 40px;position:relative;overflow:hidden}
+.hero h1{color:#fff}
+.hero .lede{color:#D3E2D9}
+.hero .eyebrow{background:rgba(255,255,255,.12);color:#fff}
+.hero::after{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:var(--ball);opacity:.9}
+.hero::before{content:"";position:absolute;inset:18px;border:2px solid rgba(255,255,255,.14);border-radius:18px;pointer-events:none}
+.hero > *{position:relative;z-index:1;max-width:560px}
+
+/* ----- Emplacements médias ----- */
+.placeholder{border:2px dashed #BDB59E;border-radius:14px;background:repeating-linear-gradient(45deg,#F2EFE5,#F2EFE5 10px,#EEEADF 10px,#EEEADF 20px);color:#7A7360;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px}
+.video{aspect-ratio:16/9;width:100%}
+
+/* ----- Cartes & grilles ----- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.card.link{transition:transform .15s,box-shadow .15s}
+.card.link:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(22,33,28,.06),0 16px 32px rgba(22,33,28,.1)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;color:var(--clay);background:#FBEDE7;border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.step .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--court);color:#fff;font-size:.8rem;font-weight:600;margin-bottom:8px}
+.step h3{font-size:1rem;margin-bottom:4px}
+.step p{font-size:.9rem;margin:0;color:var(--muted)}
+
+/* ----- Critères (cochables = auto-évaluation) ----- */
+.checklist{list-style:none;padding:0;margin:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.checklist li{border-bottom:1px solid var(--line)}
+.checklist li:last-child{border-bottom:0}
+.checklist label{display:flex;gap:14px;align-items:flex-start;padding:14px 18px;cursor:pointer}
+.checklist input{appearance:none;flex:none;width:22px;height:22px;margin:2px 0 0;border:2px solid var(--court);border-radius:6px;display:grid;place-items:center;cursor:pointer;transition:background .15s}
+.checklist input:checked{background:var(--court)}
+.checklist input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.checklist input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--ball);text-decoration-thickness:3px}
+.progress{display:flex;align-items:center;gap:12px;margin:12px 0 0;font-size:.85rem;color:var(--muted)}
+.bar{flex:1;height:8px;background:var(--line);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--court);border-radius:999px;transition:width .3s}
+
+.callout{background:#FBEDE7;border-left:4px solid var(--clay);padding:18px 22px;border-radius:0 14px 14px 0}
+.callout.green{background:var(--soft);border-left-color:var(--court)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--clay);color:#fff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:600;margin-top:24px;border:none;font-size:.98rem;cursor:pointer;font-family:inherit;transition:background .15s}
+.btn:hover{background:var(--clay-2)}
+.btn.ghost{background:transparent;color:var(--court);border:1.5px solid var(--court)}
+.btn.ghost:hover{background:var(--soft)}
+
+/* ----- Exercices ----- */
+.ex h3{font-size:1.1rem}
+.ex .meta{font-size:.82rem;color:var(--muted);margin:0 0 8px}
+.ex .goal{display:inline-block;margin-top:6px;font-size:.85rem;font-weight:600;color:var(--court);background:var(--soft);padding:5px 12px;border-radius:999px}
+
+/* ----- Argumentaire ----- */
+.arg p{text-align:justify;margin:0 0 1em}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+.key{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.key b{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--clay);margin-bottom:2px}
+.key span{font-weight:600;font-size:.95rem}
+
+.sources ul{padding-left:1.2em}
+.sources li{margin:.4em 0}
+
+footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;border-top:1px solid var(--line)}
+
+@media(max-width:820px){
+  .top-inner{flex-direction:column;align-items:stretch;gap:8px;padding:10px 16px}
+  nav.tabs{margin-left:0}
+  .grid4{grid-template-columns:1fr 1fr}
+  .keys{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .wrap{padding:36px 16px 64px}
+  .grid2,.grid3,.grid4,.keys{grid-template-columns:1fr}
+  .hero{padding:32px 24px;border-radius:22px}
+  .hero::after{width:140px;height:140px;right:-50px;bottom:-50px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <button class="brand" data-p="accueil" aria-label="Retour à l'accueil"><span class="dot"></span>Tennis · CA4</button>
+    <nav class="tabs" aria-label="Onglets du site">
+      <a href="#accueil" data-p="accueil" class="on">Accueil</a>
+      <a href="#service" data-p="service">Apprentissage 1 · Le service</a>
+      <a href="#smash" data-p="smash">Apprentissage 2 · Le smash</a>
+      <a href="#exercices" data-p="exercices">Exercices</a>
+      <a href="#argumentaire" data-p="argumentaire">Argumentaire</a>
+      <a href="#sources" data-p="sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ================= ACCUEIL ================= -->
+<section id="accueil" class="page on"><div class="wrap">
+  <div class="hero">
+    <span class="eyebrow">CA4 · Conduire et maîtriser un affrontement · Tennis</span>
+    <h1>Deux gestes, un projet de jeu</h1>
+    <p class="lede">Le service pour construire le point, le smash pour le conclure. Ce site t'accompagne avant et après tes séances d'EPS pour progresser sur ces deux gestes, à ton rythme.</p>
+    <a class="btn" href="#service" data-p="service">Commencer par le service →</a>
+  </div>
+
+  <div class="placeholder video" style="margin-top:28px">[ VIDÉO — extrait d'un point de tennis filmé, à insérer ici ]</div>
+
+  <h2>Choisis ton apprentissage</h2>
+  <div class="grid2">
+    <div class="card link">
+      <div class="placeholder" style="height:160px;margin-bottom:16px">[ IMAGE — joueur au service ]</div>
+      <span class="tag">Apprentissage 1</span>
+      <h3>Le service</h3>
+      <p style="margin:0;color:var(--muted)">Construire son projet de jeu dès l'engagement.</p>
+      <a class="btn" href="#service" data-p="service">Découvrir</a>
+    </div>
+    <div class="card link">
+      <div class="placeholder" style="height:160px;margin-bottom:16px">[ IMAGE — joueur au smash ]</div>
+      <span class="tag">Apprentissage 2</span>
+      <h3>Le smash</h3>
+      <p style="margin:0;color:var(--muted)">Appliquer les principes d'efficacité pour conclure le point.</p>
+      <a class="btn" href="#smash" data-p="smash">Découvrir</a>
+    </div>
+  </div>
+
+  <h2>Comment utiliser ce site ?</h2>
+  <div class="grid3">
+    <div class="step"><span class="n">1</span><h3>Je regarde</h3><p>Je visionne le geste en vidéo, autant de fois que nécessaire.</p></div>
+    <div class="step"><span class="n">2</span><h3>Je reproduis</h3><p>Je m'entraîne avec les exercices progressifs proposés.</p></div>
+    <div class="step"><span class="n">3</span><h3>Je m'évalue</h3><p>Je coche les critères de réussite que j'ai atteints.</p></div>
+  </div>
+</div></section>
+
+<!-- ================= SERVICE ================= -->
+<section id="service" class="page"><div class="wrap">
+  <span class="eyebrow">Enjeu : construire un projet de jeu · Domaine 1</span>
+  <h1>Le service</h1>
+  <p class="lede">Le service est le premier coup du point : bien maîtrisé, il permet de prendre l'avantage dès l'engagement.</p>
+
+  <h2><span class="num">01</span>Regarde le geste</h2>
+  <div class="placeholder video">[ VIDÉO — service complet, filmé de face puis de profil, au ralenti ]</div>
+
+  <h2><span class="num">02</span>Décompose le geste</h2>
+  <div class="grid4">
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">1</span><h3>Position</h3><p>Profil au filet, pied avant pointé vers le poteau opposé.</p></div>
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">2</span><h3>Armé</h3><p>Bras de lancer tendu, coude de frappe fléchi sous l'épaule.</p></div>
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">3</span><h3>Frappe</h3><p>Extension du bras, contact au-dessus de la tête.</p></div>
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">4</span><h3>Accompagnement</h3><p>Le geste se poursuit, retour en position d'attente.</p></div>
+  </div>
+
+  <h2><span class="num">03</span>Critères de réussite</h2>
+  <ul class="checklist" data-list="service">
+    <li><label><input type="checkbox"><span>Je lance la balle toujours au même endroit, sans la rattraper.</span></label></li>
+    <li><label><input type="checkbox"><span>Je frappe la balle au-dessus de la tête, bras tendu.</span></label></li>
+    <li><label><input type="checkbox"><span>Mon poids du corps part de l'arrière vers l'avant au moment de la frappe.</span></label></li>
+    <li><label><input type="checkbox"><span>Je place mon service dans la zone visée.</span></label></li>
+  </ul>
+  <div class="progress" data-for="service"><div class="bar"><i></i></div><span>0 / 4</span></div>
+
+  <h2><span class="num">04</span>Erreur fréquente</h2>
+  <div class="callout"><p style="margin:0"><strong>Lancer irrégulier ou trop en arrière</strong> → la frappe se fait trop tard, la balle part souvent dans le filet. <strong>Correction :</strong> s'entraîner au lancer seul, sans raquette, jusqu'à ce qu'il retombe toujours au même endroit.</p></div>
+
+  <a class="btn" href="#exercices" data-p="exercices">Voir les exercices du service →</a>
+</div></section>
+
+<!-- ================= SMASH ================= -->
+<section id="smash" class="page"><div class="wrap">
+  <span class="eyebrow">Enjeu : principes d'efficacité technique et tactique · Domaine 5</span>
+  <h1>Le smash</h1>
+  <p class="lede">Le smash se joue au-dessus de la tête, sur une balle haute de l'adversaire. Il n'a de sens que relié à une bonne intention tactique : conclure le point.</p>
+
+  <h2><span class="num">01</span>Regarde le geste</h2>
+  <div class="placeholder video">[ VIDÉO — smash complet, filmé de profil, au ralenti ]</div>
+
+  <h2><span class="num">02</span>Décompose le geste</h2>
+  <div class="grid4">
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">1</span><h3>Placement</h3><p>Je me mets de profil en pas chassés pour me placer sous la balle.</p></div>
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">2</span><h3>Armé</h3><p>Bras libre pointé vers la balle, raquette armée derrière la tête.</p></div>
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">3</span><h3>Frappe</h3><p>Contact haut, bras tendu, légèrement devant le corps.</p></div>
+    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">4</span><h3>Transfert</h3><p>Le poids du corps accompagne la balle vers l'avant et le bas.</p></div>
+  </div>
+
+  <h2><span class="num">03</span>Critères de réussite</h2>
+  <ul class="checklist" data-list="smash">
+    <li><label><input type="checkbox"><span>Je me place sous la balle en pas chassés, de profil.</span></label></li>
+    <li><label><input type="checkbox"><span>Mon bras libre pointe la balle jusqu'à la frappe.</span></label></li>
+    <li><label><input type="checkbox"><span>Je frappe la balle haut et devant moi, bras tendu.</span></label></li>
+    <li><label><input type="checkbox"><span>J'oriente mon smash loin de l'adversaire.</span></label></li>
+  </ul>
+  <div class="progress" data-for="smash"><div class="bar"><i></i></div><span>0 / 4</span></div>
+
+  <h2><span class="num">04</span>Intention tactique</h2>
+  <div class="callout green"><p style="margin:0">Le smash sert à <strong>finir le point</strong> après une balle haute et courte de l'adversaire (lob raté). On privilégie le <strong>placement</strong> loin de l'adversaire plutôt que la puissance pure : un smash bien placé gagne plus souvent qu'un smash très fort au centre.</p></div>
+
+  <a class="btn" href="#exercices" data-p="exercices">Voir les exercices du smash →</a>
+</div></section>
+
+<!-- ================= EXERCICES ================= -->
+<section id="exercices" class="page"><div class="wrap">
+  <h1>Exercices</h1>
+  <p class="lede">Des exercices progressifs pour reproduire chaque geste. Coche les critères de réussite quand tu les atteins.</p>
+
+  <h2><span class="num">S</span>Le service</h2>
+  <div class="grid2">
+    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>1. Le lancer seul</h3><p class="meta">Sans raquette</p><p>Lancer la balle et la laisser retomber toujours au même endroit, 10 fois de suite.</p><span class="goal">Critère : balle stable à ±30 cm</span></div>
+    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>2. Service dans la zone</h3><p class="meta">Avec raquette, depuis la ligne</p><p>Réaliser 10 services vers le carré de service, compter les réussites.</p><span class="goal">Critère : 6/10 dans la zone</span></div>
+  </div>
+
+  <h2><span class="num">S</span>Le smash</h2>
+  <div class="grid2">
+    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>1. Placement sous la balle</h3><p class="meta">Sans raquette, par 2</p><p>Un partenaire lance la balle haut ; je me place de profil en pas chassés et je la rattrape au-dessus de ma tête, bras libre tendu vers elle.</p><span class="goal">Critère : 8 balles attrapées sur 10</span></div>
+    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>2. Smash dans une zone</h3><p class="meta">Avec raquette, par 2, à mi-court</p><p>Le partenaire envoie une balle haute à la main ; je smashe vers une zone matérialisée par des plots, loin de lui.</p><span class="goal">Critère : 5/10 dans la zone</span></div>
+  </div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <a class="btn ghost" href="#service" data-p="service">← Revoir le service</a>
+    <a class="btn ghost" href="#smash" data-p="smash">← Revoir le smash</a>
+  </div>
+</div></section>
+
+<!-- ================= ARGUMENTAIRE ================= -->
+<section id="argumentaire" class="page"><div class="wrap arg">
+  <h1>Argumentaire</h1>
+
+  <div class="keys">
+    <div class="key"><b>Champ d'apprentissage</b><span>CA4 · Affrontement</span></div>
+    <div class="key"><b>Niveau</b><span>Cycle 4 · 4ᵉ</span></div>
+    <div class="key"><b>Activité</b><span>Tennis</span></div>
+    <div class="key"><b>Modèle SAMR</b><span>Modification</span></div>
+    <div class="key"><b>Berthiaume &amp; Daële</b><span>Niveaux 1 et 2</span></div>
+    <div class="key"><b>Dispositif</b><span>Présentiel augmenté</span></div>
+  </div>
+
+  <p>Selon le Bulletin officiel n°31 du 30 juillet 2020 (programme du cycle 4), notre proposition pédagogique s'inscrit dans le champ d'apprentissage 4 « Conduire et maîtriser un affrontement collectif ou interindividuel », au cycle 4, en classe de 4ᵉ, à travers l'activité tennis. Elle mobilise deux compétences du socle commun de connaissances, de compétences et de culture&nbsp;: le domaine 1 « Des langages pour penser et communiquer », via l'enjeu « acquérir et stabiliser des techniques spécifiques pour construire et mettre en œuvre un projet de jeu afin de battre l'adversaire » (geste travaillé&nbsp;: le service), et le domaine 5 « Les représentations du monde et l'activité humaine », via l'enjeu « s'approprier des principes d'efficacité des techniques et tactiques sportives » (geste travaillé&nbsp;: le smash).</p>
+  <p>Sur le plan des apprentissages en EPS, notre site privilégie la dimension motrice (acquisition et stabilisation du geste technique), tout en développant une dimension méthodologique (observation d'un modèle, auto-évaluation à partir de critères de réussite).</p>
+  <p>D'un point de vue de la transposition didactique, en suivant le modèle SAMR de Ruben Puentedura, notre site se situe au niveau de la Modification&nbsp;: le numérique ne se contente pas de remplacer une fiche papier, il transforme la tâche en permettant à l'élève de choisir son parcours d'apprentissage, de visionner le geste à son rythme et de s'auto-évaluer en autonomie entre les séances.</p>
+  <p>En termes d'apprentissage psychomoteur, en référence à la taxonomie de Berthiaume et Daële (2013), notre dispositif vise essentiellement les niveaux 1 (Perception, à travers la découverte du geste en vidéo) et 2 (Reproduction, à travers les exercices proposés pour poser le geste), le niveau 3 (Perfectionnement) restant un objectif à plus long terme en classe.</p>
+  <p>Enfin, notre site correspond à un dispositif de type présentiel augmenté, les contenus numériques (vidéos, fiches techniques, critères de réussite) venant enrichir, en amont et en aval des séances, l'apprentissage réalisé principalement en présentiel avec l'enseignant.</p>
+
+  <p style="font-size:.9rem;color:var(--muted);text-align:left;margin-top:28px">Binôme : Corentin Bernier &amp; Tom Agnan — Cycle 4, classe de 4ᵉ</p>
+</div></section>
+
+<!-- ================= SOURCES ================= -->
+<section id="sources" class="page"><div class="wrap sources">
+  <h1>Sources</h1>
+  <h2>Textes institutionnels</h2>
+  <ul>
+    <li>Programme d'EPS cycle 4 — BO n°31 du 30 juillet 2020 (BOEN spécial n°11 du 26 novembre 2015)</li>
+    <li>Éduscol — « Enjeux d'apprentissage du CA4 », mars 2016</li>
+    <li>Socle commun de connaissances, de compétences et de culture — domaines 1 et 5</li>
+  </ul>
+  <h2>Modèles pédagogiques</h2>
+  <ul>
+    <li>Modèle SAMR — Ruben Puentedura</li>
+    <li>Taxonomie de Berthiaume &amp; Daële (2013)</li>
+  </ul>
+  <h2>Technique tennis</h2>
+  <ul>
+    <li>Fiches techniques service / smash — sites spécialisés tennis</li>
+  </ul>
+</div></section>
+</main>
+
+<footer>Projet réalisé par Corentin Bernier &amp; Tom Agnan — Cycle 4, classe de 4ᵉ</footer>
+
+<script>
+// Onglets : chaque page a sa propre adresse (#service, #smash…)
+var pages = ['accueil','service','smash','exercices','argumentaire','sources'];
+function show(id){
+  if(pages.indexOf(id) < 0) id = 'accueil';
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.toggle('on', p.id === id); });
+  document.querySelectorAll('nav.tabs a').forEach(function(a){
+    a.classList.toggle('on', a.dataset.p === id);
+    if(a.dataset.p === id) a.scrollIntoView({block:'nearest', inline:'center'});
+  });
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-p]').forEach(function(el){
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    if(location.hash !== '#'+el.dataset.p) history.pushState(null,'','#'+el.dataset.p);
+    show(el.dataset.p);
+  });
+});
+window.addEventListener('popstate', function(){ show(location.hash.slice(1)); });
+show(location.hash.slice(1));
+
+// Auto-évaluation : les cases cochées sont gardées sur l'appareil de l'élève
+function load(k){ try { return JSON.parse(localStorage.getItem(k)) || []; } catch(e){ return []; } }
+function save(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+document.querySelectorAll('.checklist').forEach(function(list){
+  var key = 'criteres-' + list.dataset.list;
+  var boxes = list.querySelectorAll('input');
+  var prog = document.querySelector('.progress[data-for="'+list.dataset.list+'"]');
+  var saved = load(key);
+  function update(){
+    var done = 0, state = [];
+    boxes.forEach(function(b){ state.push(b.checked); if(b.checked) done++; });
+    save(key, state);
+    if(prog){
+      prog.querySelector('i').style.width = (done / boxes.length * 100) + '%';
+      prog.querySelector('span').textContent = done + ' / ' + boxes.length + (done === boxes.length ? ' — bravo !' : '');
+    }
+  }
+  boxes.forEach(function(b,i){ b.checked = !!saved[i]; b.addEventListener('change', update); });
+  update();
+});
+</script>
+</body>
+</html>
