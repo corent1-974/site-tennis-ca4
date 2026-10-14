@@ -8,3 +8,9 @@ Projet de Corentin Bernier & Tom Agnan.
 - Tout le site tient dans un seul fichier : `index.html` (HTML + CSS + un peu de JavaScript).
 - Hébergement : GitHub Pages, sur le compte GitHub de l'auteur. Le code appartient à ses auteurs
   et peut être déplacé chez n'importe quel autre hébergeur (Netlify, serveur de l'établissement…).
+
+## Ajouter vos photos dans les mini-jeux (onglet Exercices)
+
+1. Déposez la photo dans le dépôt (« Add file » → « Upload files »), par exemple `service-1.jpg`.
+2. Dans `index.html`, cherchez `ETAPES_SERVICE` (service) ou `SITUATIONS_SMASH` (smash)
+   et remplacez `photo: ''` par `photo: 'service-1.jpg'` sur la bonne ligne.

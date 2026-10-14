@@ -124,6 +124,40 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
   .hero{padding:32px 24px;border-radius:22px}
   .hero::after{width:140px;height:140px;right:-50px;bottom:-50px}
 }
+
+/* ----- Mini-jeux ----- */
+.consigne{color:var(--muted);margin-top:0}
+.order{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.order li{display:flex;align-items:center;gap:14px;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:10px 12px;box-shadow:var(--shadow);cursor:grab;transition:border-color .15s,background .15s;user-select:none}
+.order li.dragging{opacity:.5}
+.order li .pos{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--court);font-weight:600;font-size:.85rem}
+.order li .ph{flex:none;width:72px;height:54px;padding:4px;font-size:.65rem}
+.ph img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.order li .txt{flex:1;min-width:0}
+.order li .txt b{display:block;font-family:Fraunces,Georgia,serif;color:var(--court)}
+.order li .txt small{color:var(--muted)}
+.order li .hint{display:none;margin-top:4px;font-size:.82rem;color:var(--clay-2);font-weight:500}
+.order li .arrows{display:flex;flex-direction:column;gap:4px}
+.arrows button{width:34px;height:28px;border:1.5px solid var(--line);background:var(--cream);border-radius:8px;cursor:pointer;color:var(--court);font-size:.9rem}
+.arrows button:hover{border-color:var(--court)}
+.order li.ok,.sort .item.ok{border-color:#2E8B57;background:#EAF6EF}
+.order li.ko,.sort .item.ko{border-color:var(--clay);background:#FBEDE7}
+.order li.ko .hint{display:block}
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sort .item{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:border-color .15s,background .15s}
+.sort .item .ph{height:110px;font-size:.75rem}
+.sort .item p{margin:0;font-weight:500}
+.choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.choices button{flex:1;min-width:120px;font:inherit;font-size:.88rem;font-weight:600;padding:8px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--cream);cursor:pointer;color:var(--ink)}
+.choices button[aria-pressed="true"][data-v="oui"]{background:var(--court);border-color:var(--court);color:#fff}
+.choices button[aria-pressed="true"][data-v="non"]{background:var(--clay);border-color:var(--clay);color:#fff}
+.sort .item .why{display:none;font-size:.85rem;color:var(--muted)}
+.sort .item.ok .why,.sort .item.ko .why{display:block}
+.game-actions{display:flex;gap:12px;flex-wrap:wrap}
+.game-actions .btn{margin-top:18px}
+.result{font-weight:600;color:var(--court);min-height:1.6em;margin:14px 0 0}
+.result.bad{color:var(--clay-2)}
+@media(max-width:600px){.sort{grid-template-columns:1fr}.order li .ph{display:none}}
 </style>
 </head>
 <body>
@@ -175,8 +209,8 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
   <h2>Comment utiliser ce site ?</h2>
   <div class="grid3">
     <div class="step"><span class="n">1</span><h3>Je regarde</h3><p>Je visionne le geste en vidéo, autant de fois que nécessaire.</p></div>
-    <div class="step"><span class="n">2</span><h3>Je reproduis</h3><p>Je m'entraîne avec les exercices progressifs proposés.</p></div>
-    <div class="step"><span class="n">3</span><h3>Je m'évalue</h3><p>Je coche les critères de réussite que j'ai atteints.</p></div>
+    <div class="step"><span class="n">2</span><h3>Je teste</h3><p>Je vérifie ma compréhension avec les mini-jeux, puis je reproduis le geste en séance.</p></div>
+    <div class="step"><span class="n">3</span><h3>Je m'évalue</h3><p>Après la séance, je coche les critères de réussite que j'ai atteints.</p></div>
   </div>
 </div></section>
 
@@ -247,21 +281,27 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
 <!-- ================= EXERCICES ================= -->
 <section id="exercices" class="page"><div class="wrap">
   <h1>Exercices</h1>
-  <p class="lede">Des exercices progressifs pour reproduire chaque geste. Coche les critères de réussite quand tu les atteins.</p>
+  <p class="lede">Deux mini-jeux pour vérifier que tu as bien compris chaque geste avant de le reproduire en séance. Tu peux recommencer autant de fois que tu veux.</p>
 
-  <h2><span class="num">S</span>Le service</h2>
-  <div class="grid2">
-    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>1. Le lancer seul</h3><p class="meta">Sans raquette</p><p>Lancer la balle et la laisser retomber toujours au même endroit, 10 fois de suite.</p><span class="goal">Critère : balle stable à ±30 cm</span></div>
-    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>2. Service dans la zone</h3><p class="meta">Avec raquette, depuis la ligne</p><p>Réaliser 10 services vers le carré de service, compter les réussites.</p><span class="goal">Critère : 6/10 dans la zone</span></div>
+  <h2><span class="num">01</span>Le service : remets les étapes dans l'ordre</h2>
+  <p class="consigne">Les 4 étapes du service sont mélangées. Fais-les glisser (ou utilise les flèches ↑ ↓) pour les remettre dans l'ordre, puis clique sur <strong>Vérifier</strong>.</p>
+  <ol class="order" id="jeu-ordre"></ol>
+  <div class="game-actions">
+    <button class="btn" id="ordre-verifier">Vérifier</button>
+    <button class="btn ghost" id="ordre-recommencer">Recommencer</button>
   </div>
+  <p class="result" id="ordre-resultat" aria-live="polite"></p>
 
-  <h2><span class="num">S</span>Le smash</h2>
-  <div class="grid2">
-    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>1. Placement sous la balle</h3><p class="meta">Sans raquette, par 2</p><p>Un partenaire lance la balle haut ; je me place de profil en pas chassés et je la rattrape au-dessus de ma tête, bras libre tendu vers elle.</p><span class="goal">Critère : 8 balles attrapées sur 10</span></div>
-    <div class="card ex"><div class="placeholder" style="height:110px;margin-bottom:14px">[IMAGE — schéma du terrain]</div><h3>2. Smash dans une zone</h3><p class="meta">Avec raquette, par 2, à mi-court</p><p>Le partenaire envoie une balle haute à la main ; je smashe vers une zone matérialisée par des plots, loin de lui.</p><span class="goal">Critère : 5/10 dans la zone</span></div>
+  <h2><span class="num">02</span>Le smash : efficace ou pas efficace ?</h2>
+  <p class="consigne">Pour chaque situation, choisis si le smash est <strong>efficace</strong> ou <strong>pas efficace</strong>, puis clique sur <strong>Vérifier</strong>.</p>
+  <div class="sort" id="jeu-tri"></div>
+  <div class="game-actions">
+    <button class="btn" id="tri-verifier">Vérifier</button>
+    <button class="btn ghost" id="tri-recommencer">Recommencer</button>
   </div>
+  <p class="result" id="tri-resultat" aria-live="polite"></p>
 
-  <div style="display:flex;gap:12px;flex-wrap:wrap">
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
     <a class="btn ghost" href="#service" data-p="service">← Revoir le service</a>
     <a class="btn ghost" href="#smash" data-p="smash">← Revoir le smash</a>
   </div>
@@ -283,7 +323,7 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
   <p>Selon le Bulletin officiel n°31 du 30 juillet 2020 (programme du cycle 4), notre proposition pédagogique s'inscrit dans le champ d'apprentissage 4 « Conduire et maîtriser un affrontement collectif ou interindividuel », au cycle 4, en classe de 4ᵉ, à travers l'activité tennis. Elle mobilise deux compétences du socle commun de connaissances, de compétences et de culture&nbsp;: le domaine 1 « Des langages pour penser et communiquer », via l'enjeu « acquérir et stabiliser des techniques spécifiques pour construire et mettre en œuvre un projet de jeu afin de battre l'adversaire » (geste travaillé&nbsp;: le service), et le domaine 5 « Les représentations du monde et l'activité humaine », via l'enjeu « s'approprier des principes d'efficacité des techniques et tactiques sportives » (geste travaillé&nbsp;: le smash).</p>
   <p>Sur le plan des apprentissages en EPS, notre site privilégie la dimension motrice (acquisition et stabilisation du geste technique), tout en développant une dimension méthodologique (observation d'un modèle, auto-évaluation à partir de critères de réussite).</p>
   <p>D'un point de vue de la transposition didactique, en suivant le modèle SAMR de Ruben Puentedura, notre site se situe au niveau de la Modification&nbsp;: le numérique ne se contente pas de remplacer une fiche papier, il transforme la tâche en permettant à l'élève de choisir son parcours d'apprentissage, de visionner le geste à son rythme et de s'auto-évaluer en autonomie entre les séances.</p>
-  <p>En termes d'apprentissage psychomoteur, en référence à la taxonomie de Berthiaume et Daële (2013), notre dispositif vise essentiellement les niveaux 1 (Perception, à travers la découverte du geste en vidéo) et 2 (Reproduction, à travers les exercices proposés pour poser le geste), le niveau 3 (Perfectionnement) restant un objectif à plus long terme en classe.</p>
+  <p>En termes d'apprentissage psychomoteur, en référence à la taxonomie de Berthiaume et Daële (2013), notre dispositif vise essentiellement les niveaux 1 (Perception, à travers la découverte du geste en vidéo) et 2 (Reproduction, préparée par des exercices interactifs qui permettent à l'élève de vérifier sa compréhension du geste avant de le reproduire en séance), le niveau 3 (Perfectionnement) restant un objectif à plus long terme en classe.</p>
   <p>Enfin, notre site correspond à un dispositif de type présentiel augmenté, les contenus numériques (vidéos, fiches techniques, critères de réussite) venant enrichir, en amont et en aval des séances, l'apprentissage réalisé principalement en présentiel avec l'enseignant.</p>
 
   <p style="font-size:.9rem;color:var(--muted);text-align:left;margin-top:28px">Binôme : Corentin Bernier &amp; Tom Agnan — Cycle 4, classe de 4ᵉ</p>
@@ -354,6 +394,141 @@ document.querySelectorAll('.checklist').forEach(function(list){
   boxes.forEach(function(b,i){ b.checked = !!saved[i]; b.addEventListener('change', update); });
   update();
 });
+
+// ================= MINI-JEUX =================
+// Pour ajouter vos photos : déposez l'image dans le dépôt (ex. service-1.jpg)
+// et écrivez son nom dans « photo » ci-dessous (ex. photo: 'service-1.jpg').
+var ETAPES_SERVICE = [
+  { titre: 'Position', texte: 'Profil au filet, pied avant pointé vers le poteau opposé.', photo: '',
+    indice: 'On commence toujours par se placer avant de bouger les bras.' },
+  { titre: 'Armé', texte: 'Bras de lancer tendu, coude de frappe fléchi sous l\'épaule.', photo: '',
+    indice: 'On lance la balle et on prépare la raquette avant de frapper.' },
+  { titre: 'Frappe', texte: 'Extension du bras, contact au-dessus de la tête.', photo: '',
+    indice: 'La frappe vient juste après l\'armé, quand la balle est en haut.' },
+  { titre: 'Accompagnement', texte: 'Le geste se poursuit, retour en position d\'attente.', photo: '',
+    indice: 'L\'accompagnement termine le geste : c\'est la dernière étape.' }
+];
+
+var SITUATIONS_SMASH = [
+  { texte: 'Le joueur reste de face au filet pour se préparer.', efficace: false, photo: '',
+    pourquoi: 'Il faut se mettre de profil pour pouvoir armer et frapper.' },
+  { texte: 'Le bras libre pointe la balle pendant la préparation.', efficace: true, photo: '',
+    pourquoi: 'Le bras libre aide à viser la balle et à garder l\'équilibre.' },
+  { texte: 'La balle est frappée derrière la tête.', efficace: false, photo: '',
+    pourquoi: 'On frappe haut et devant soi pour envoyer la balle vers le bas.' },
+  { texte: 'Le joueur se place sous la balle en pas chassés.', efficace: true, photo: '',
+    pourquoi: 'Les pas chassés permettent de se placer sans tourner le dos au filet.' },
+  { texte: 'Le smash est envoyé très fort, directement sur l\'adversaire.', efficace: false, photo: '',
+    pourquoi: 'On vise loin de l\'adversaire : le placement compte plus que la puissance.' },
+  { texte: 'Le joueur smashe une balle haute et courte (lob raté de l\'adversaire).', efficace: true, photo: '',
+    pourquoi: 'C\'est la bonne situation pour conclure le point.' }
+];
+
+function photoHTML(item, label){
+  return item.photo
+    ? '<div class="ph"><img src="' + item.photo + '" alt="' + label + '"></div>'
+    : '<div class="ph placeholder">[PHOTO]</div>';
+}
+function melanger(t){
+  var a = t.slice();
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; }
+  return a;
+}
+
+// ----- Jeu 1 : remettre le service dans l'ordre -----
+var liste = document.getElementById('jeu-ordre');
+var resOrdre = document.getElementById('ordre-resultat');
+function numeroter(){
+  liste.querySelectorAll('li').forEach(function(li, i){ li.querySelector('.pos').textContent = i + 1; });
+}
+function effacerCorrection(){
+  liste.querySelectorAll('li').forEach(function(li){ li.classList.remove('ok','ko'); });
+  resOrdre.textContent = ''; resOrdre.classList.remove('bad');
+}
+function nouvelOrdre(){
+  var ordre;
+  do { ordre = melanger([0,1,2,3]); } while (ordre.join() === '0,1,2,3');
+  liste.innerHTML = '';
+  ordre.forEach(function(k){
+    var e = ETAPES_SERVICE[k];
+    var li = document.createElement('li');
+    li.draggable = true; li.dataset.k = k;
+    li.innerHTML = '<span class="pos"></span>' + photoHTML(e, e.titre) +
+      '<div class="txt"><b>' + e.titre + '</b><small>' + e.texte + '</small><div class="hint">' + e.indice + '</div></div>' +
+      '<div class="arrows"><button type="button" data-d="-1" aria-label="Monter">↑</button><button type="button" data-d="1" aria-label="Descendre">↓</button></div>';
+    liste.appendChild(li);
+  });
+  numeroter(); effacerCorrection();
+}
+liste.addEventListener('click', function(e){
+  var b = e.target.closest('.arrows button'); if (!b) return;
+  var li = b.closest('li');
+  if (b.dataset.d === '-1' && li.previousElementSibling) liste.insertBefore(li, li.previousElementSibling);
+  if (b.dataset.d === '1' && li.nextElementSibling) liste.insertBefore(li.nextElementSibling, li);
+  numeroter(); effacerCorrection();
+});
+// glisser-déposer (ordinateur)
+var tire = null;
+liste.addEventListener('dragstart', function(e){ tire = e.target.closest('li'); tire.classList.add('dragging'); });
+liste.addEventListener('dragend', function(){ if (tire) tire.classList.remove('dragging'); tire = null; numeroter(); effacerCorrection(); });
+liste.addEventListener('dragover', function(e){
+  e.preventDefault();
+  var cible = e.target.closest('li'); if (!tire || !cible || cible === tire) return;
+  var r = cible.getBoundingClientRect();
+  liste.insertBefore(tire, e.clientY > r.top + r.height / 2 ? cible.nextElementSibling : cible);
+});
+document.getElementById('ordre-verifier').addEventListener('click', function(){
+  var bons = 0;
+  liste.querySelectorAll('li').forEach(function(li, i){
+    var ok = Number(li.dataset.k) === i;
+    li.classList.toggle('ok', ok); li.classList.toggle('ko', !ok);
+    if (ok) bons++;
+  });
+  resOrdre.classList.toggle('bad', bons < 4);
+  resOrdre.textContent = bons === 4 ? 'Bravo, 4/4 ! Tu connais les étapes du service.'
+    : bons + '/4 étapes bien placées. Lis les indices en rouge et réessaie.';
+});
+document.getElementById('ordre-recommencer').addEventListener('click', nouvelOrdre);
+nouvelOrdre();
+
+// ----- Jeu 2 : smash efficace ou pas -----
+var tri = document.getElementById('jeu-tri');
+var resTri = document.getElementById('tri-resultat');
+function nouveauTri(){
+  tri.innerHTML = '';
+  melanger(SITUATIONS_SMASH).forEach(function(s){
+    var d = document.createElement('div');
+    d.className = 'item'; d.dataset.bon = s.efficace ? 'oui' : 'non';
+    d.innerHTML = photoHTML(s, s.texte) + '<p>' + s.texte + '</p>' +
+      '<div class="choices"><button type="button" data-v="oui" aria-pressed="false">✅ Efficace</button>' +
+      '<button type="button" data-v="non" aria-pressed="false">❌ Pas efficace</button></div>' +
+      '<div class="why">' + s.pourquoi + '</div>';
+    tri.appendChild(d);
+  });
+  resTri.textContent = ''; resTri.classList.remove('bad');
+}
+tri.addEventListener('click', function(e){
+  var b = e.target.closest('.choices button'); if (!b) return;
+  var item = b.closest('.item');
+  item.querySelectorAll('.choices button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+  item.dataset.choix = b.dataset.v;
+  item.classList.remove('ok','ko');
+});
+document.getElementById('tri-verifier').addEventListener('click', function(){
+  var items = tri.querySelectorAll('.item'), bons = 0, vides = 0;
+  items.forEach(function(it){
+    if (!it.dataset.choix) { vides++; it.classList.remove('ok','ko'); return; }
+    var ok = it.dataset.choix === it.dataset.bon;
+    it.classList.toggle('ok', ok); it.classList.toggle('ko', !ok);
+    if (ok) bons++;
+  });
+  resTri.classList.toggle('bad', bons < items.length);
+  resTri.textContent = vides ? 'Il te reste ' + vides + ' situation(s) à classer.'
+    : bons === items.length ? 'Bravo, ' + bons + '/' + items.length + ' ! Tu connais les principes d\'efficacité du smash.'
+    : bons + '/' + items.length + ' bonnes réponses. Lis les explications et réessaie.';
+});
+document.getElementById('tri-recommencer').addEventListener('click', nouveauTri);
+nouveauTri();
 </script>
 </body>
 </html>
