@@ -143,6 +143,7 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
 .order li.ok,.sort .item.ok{border-color:#2E8B57;background:#EAF6EF}
 .order li.ko,.sort .item.ko{border-color:var(--clay);background:#FBEDE7}
 .order li.ko .hint{display:block}
+.order li.ko.sans-indice .hint{display:none}
 .sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .sort .item{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:border-color .15s,background .15s}
 .sort .item .ph{height:110px;font-size:.75rem}
@@ -281,7 +282,7 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
 <!-- ================= EXERCICES ================= -->
 <section id="exercices" class="page"><div class="wrap">
   <h1>Exercices</h1>
-  <p class="lede">Deux mini-jeux pour vérifier que tu as bien compris chaque geste avant de le reproduire en séance. Tu peux recommencer autant de fois que tu veux.</p>
+  <p class="lede">Des mini-jeux pour vérifier que tu as bien compris chaque geste avant de le reproduire en séance. Tu peux recommencer autant de fois que tu veux.</p>
 
   <h2><span class="num">01</span>Le service : remets les étapes dans l'ordre</h2>
   <p class="consigne">Les 4 étapes du service sont mélangées. Fais-les glisser (ou utilise les flèches ↑ ↓) pour les remettre dans l'ordre, puis clique sur <strong>Vérifier</strong>.</p>
@@ -292,12 +293,21 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
   </div>
   <p class="result" id="ordre-resultat" aria-live="polite"></p>
 
-  <h2><span class="num">02</span>Le smash : efficace ou pas efficace ?</h2>
-  <p class="consigne">Pour chaque situation, choisis si le smash est <strong>efficace</strong> ou <strong>pas efficace</strong>, puis clique sur <strong>Vérifier</strong>.</p>
+  <h2><span class="num">02</span>Le service, niveau expert : 8 étapes sans les noms</h2>
+  <p class="consigne">Plus difficile : le service est découpé en <strong>8 étapes</strong> et leurs noms sont cachés. Lis bien chaque description et remets-les dans l'ordre. Les indices n'apparaissent qu'à partir du <strong>2ᵉ essai</strong>.</p>
+  <ol class="order" id="jeu-expert"></ol>
+  <div class="game-actions">
+    <button class="btn" id="expert-verifier">Vérifier</button>
+    <button class="btn ghost" id="expert-recommencer">Recommencer</button>
+  </div>
+  <p class="result" id="expert-resultat" aria-live="polite"></p>
+
+  <h2><span class="num">03</span>Le smash : efficace ou pas efficace ?</h2>
+  <p class="consigne">Pour chaque situation, choisis si le smash est <strong>efficace</strong> ou <strong>pas efficace</strong>, puis clique sur <strong>Vérifier</strong>. Quand tu as tout bon, clique sur <strong>Nouvelles situations</strong> : 6 nouvelles situations sont tirées au sort parmi 18.</p>
   <div class="sort" id="jeu-tri"></div>
   <div class="game-actions">
     <button class="btn" id="tri-verifier">Vérifier</button>
-    <button class="btn ghost" id="tri-recommencer">Recommencer</button>
+    <button class="btn ghost" id="tri-recommencer">Nouvelles situations</button>
   </div>
   <p class="result" id="tri-resultat" aria-live="polite"></p>
 
@@ -398,6 +408,8 @@ document.querySelectorAll('.checklist').forEach(function(list){
 // ================= MINI-JEUX =================
 // Pour ajouter vos photos : déposez l'image dans le dépôt (ex. service-1.jpg)
 // et écrivez son nom dans « photo » ci-dessous (ex. photo: 'service-1.jpg').
+
+// Jeu 1 : service, 4 étapes (dans le bon ordre)
 var ETAPES_SERVICE = [
   { titre: 'Position', texte: 'Profil au filet, pied avant pointé vers le poteau opposé.', photo: '',
     indice: 'On commence toujours par se placer avant de bouger les bras.' },
@@ -409,19 +421,64 @@ var ETAPES_SERVICE = [
     indice: 'L\'accompagnement termine le geste : c\'est la dernière étape.' }
 ];
 
+// Jeu 2 : service niveau expert, 8 étapes (dans le bon ordre, noms cachés)
+var ETAPES_SERVICE_EXPERT = [
+  { texte: 'Je me place derrière la ligne de fond, de profil, pied avant pointé vers le poteau opposé.', photo: '',
+    indice: 'Avant de bouger, il faut être bien placé derrière la ligne.' },
+  { texte: 'Je tiens la raquette en prise « marteau » et la balle du bout des doigts, les deux devant moi.', photo: '',
+    indice: 'On prépare sa prise et sa balle avant de commencer le mouvement.' },
+  { texte: 'Les deux bras descendent ensemble, puis le bras libre remonte tendu.', photo: '',
+    indice: 'Les bras partent ensemble vers le bas avant que la balle ne soit lâchée.' },
+  { texte: 'Je lâche la balle au-dessus de ma tête, légèrement devant moi, sans la lancer d\'un coup de poignet.', photo: '',
+    indice: 'Le lancer arrive quand le bras libre monte, avant l\'armé complet.' },
+  { texte: 'Position du « trophée » : bras libre pointé vers la balle, raquette derrière l\'épaule, genoux fléchis.', photo: '',
+    indice: 'Pendant que la balle monte, on arme la raquette et on fléchit les jambes.' },
+  { texte: 'Je pousse sur mes jambes vers le haut et vers l\'avant.', photo: '',
+    indice: 'La poussée des jambes donne de l\'énergie juste avant la frappe.' },
+  { texte: 'Je frappe la balle au point le plus haut, bras tendu, devant moi.', photo: '',
+    indice: 'La frappe vient après la poussée des jambes, quand le bras se tend.' },
+  { texte: 'La raquette termine de l\'autre côté du corps, je retombe sur le pied avant et je me replace.', photo: '',
+    indice: 'C\'est la fin du geste : accompagnement et replacement.' }
+];
+
+// Jeu 3 : smash, banque de situations (6 tirées au sort à chaque partie : 3 efficaces + 3 pas efficaces)
 var SITUATIONS_SMASH = [
-  { texte: 'Le joueur reste de face au filet pour se préparer.', efficace: false, photo: '',
-    pourquoi: 'Il faut se mettre de profil pour pouvoir armer et frapper.' },
   { texte: 'Le bras libre pointe la balle pendant la préparation.', efficace: true, photo: '',
     pourquoi: 'Le bras libre aide à viser la balle et à garder l\'équilibre.' },
-  { texte: 'La balle est frappée derrière la tête.', efficace: false, photo: '',
-    pourquoi: 'On frappe haut et devant soi pour envoyer la balle vers le bas.' },
   { texte: 'Le joueur se place sous la balle en pas chassés.', efficace: true, photo: '',
     pourquoi: 'Les pas chassés permettent de se placer sans tourner le dos au filet.' },
+  { texte: 'Le joueur smashe une balle haute et courte (lob raté de l\'adversaire).', efficace: true, photo: '',
+    pourquoi: 'C\'est la bonne situation pour conclure le point.' },
+  { texte: 'Le smash est dirigé vers la zone vide, loin de l\'adversaire.', efficace: true, photo: '',
+    pourquoi: 'Un smash bien placé est plus difficile à renvoyer qu\'un smash fort au centre.' },
+  { texte: 'Dès que la balle monte, le joueur se tourne de profil.', efficace: true, photo: '',
+    pourquoi: 'Se mettre de profil tôt laisse le temps d\'armer correctement.' },
+  { texte: 'La balle est frappée haut, bras tendu, légèrement devant le corps.', efficace: true, photo: '',
+    pourquoi: 'Un contact haut et devant permet d\'envoyer la balle vers le bas.' },
+  { texte: 'La raquette est armée derrière la tête avant que la balle redescende.', efficace: true, photo: '',
+    pourquoi: 'Une préparation précoce évite de frapper en retard.' },
+  { texte: 'Sur un lob très haut, le joueur laisse rebondir la balle puis smashe.', efficace: true, photo: '',
+    pourquoi: 'Le rebond ralentit la balle : plus facile de bien se placer.' },
+  { texte: 'Après son smash, le joueur se replace tout de suite, prêt à rejouer.', efficace: true, photo: '',
+    pourquoi: 'Si l\'adversaire renvoie la balle, on est prêt à conclure.' },
+  { texte: 'Le joueur reste de face au filet pour se préparer.', efficace: false, photo: '',
+    pourquoi: 'Il faut se mettre de profil pour pouvoir armer et frapper.' },
+  { texte: 'La balle est frappée derrière la tête.', efficace: false, photo: '',
+    pourquoi: 'On frappe haut et devant soi pour envoyer la balle vers le bas.' },
   { texte: 'Le smash est envoyé très fort, directement sur l\'adversaire.', efficace: false, photo: '',
     pourquoi: 'On vise loin de l\'adversaire : le placement compte plus que la puissance.' },
-  { texte: 'Le joueur smashe une balle haute et courte (lob raté de l\'adversaire).', efficace: true, photo: '',
-    pourquoi: 'C\'est la bonne situation pour conclure le point.' }
+  { texte: 'Le joueur recule en courant, dos au filet.', efficace: false, photo: '',
+    pourquoi: 'Dos au filet, on perd la balle des yeux : on recule en pas chassés, de profil.' },
+  { texte: 'Le joueur attend la balle les pieds immobiles.', efficace: false, photo: '',
+    pourquoi: 'Il faut ajuster son placement avec de petits pas jusqu\'à la frappe.' },
+  { texte: 'Le bras libre reste le long du corps.', efficace: false, photo: '',
+    pourquoi: 'Sans le bras libre, on vise moins bien et on perd l\'équilibre.' },
+  { texte: 'Le joueur smashe une balle basse, sous le niveau de l\'épaule.', efficace: false, photo: '',
+    pourquoi: 'Une balle basse se joue en volée : le smash est fait pour les balles hautes.' },
+  { texte: 'Au moment de frapper, le joueur regarde l\'adversaire au lieu de la balle.', efficace: false, photo: '',
+    pourquoi: 'Les yeux restent sur la balle jusqu\'au contact, sinon on la frappe mal.' },
+  { texte: 'Le joueur frappe bras plié, la balle au niveau de son visage.', efficace: false, photo: '',
+    pourquoi: 'Bras plié et contact trop bas : la balle part souvent dans le filet.' }
 ];
 
 function photoHTML(item, label){
@@ -435,68 +492,89 @@ function melanger(t){
   return a;
 }
 
-// ----- Jeu 1 : remettre le service dans l'ordre -----
-var liste = document.getElementById('jeu-ordre');
-var resOrdre = document.getElementById('ordre-resultat');
-function numeroter(){
-  liste.querySelectorAll('li').forEach(function(li, i){ li.querySelector('.pos').textContent = i + 1; });
-}
-function effacerCorrection(){
-  liste.querySelectorAll('li').forEach(function(li){ li.classList.remove('ok','ko'); });
-  resOrdre.textContent = ''; resOrdre.classList.remove('bad');
-}
-function nouvelOrdre(){
-  var ordre;
-  do { ordre = melanger([0,1,2,3]); } while (ordre.join() === '0,1,2,3');
-  liste.innerHTML = '';
-  ordre.forEach(function(k){
-    var e = ETAPES_SERVICE[k];
-    var li = document.createElement('li');
-    li.draggable = true; li.dataset.k = k;
-    li.innerHTML = '<span class="pos"></span>' + photoHTML(e, e.titre) +
-      '<div class="txt"><b>' + e.titre + '</b><small>' + e.texte + '</small><div class="hint">' + e.indice + '</div></div>' +
-      '<div class="arrows"><button type="button" data-d="-1" aria-label="Monter">↑</button><button type="button" data-d="1" aria-label="Descendre">↓</button></div>';
-    liste.appendChild(li);
+// ----- Jeux « remettre dans l'ordre » (service) -----
+function jeuOrdre(opts){
+  var liste = document.getElementById(opts.liste);
+  var res = document.getElementById(opts.resultat);
+  var n = opts.etapes.length, essais = 0;
+  function numeroter(){
+    liste.querySelectorAll('li').forEach(function(li, i){ li.querySelector('.pos').textContent = i + 1; });
+  }
+  function effacer(){
+    liste.querySelectorAll('li').forEach(function(li){ li.classList.remove('ok','ko','sans-indice'); });
+    res.textContent = ''; res.classList.remove('bad');
+  }
+  function nouveau(){
+    var idx = opts.etapes.map(function(_, i){ return i; }), ordre;
+    do { ordre = melanger(idx); } while (ordre.join() === idx.join());
+    liste.innerHTML = ''; essais = 0;
+    ordre.forEach(function(k){
+      var e = opts.etapes[k];
+      var li = document.createElement('li');
+      li.draggable = true; li.dataset.k = k;
+      li.innerHTML = '<span class="pos"></span>' + photoHTML(e, e.titre || 'Étape du service') +
+        '<div class="txt">' + (e.titre ? '<b>' + e.titre + '</b>' : '') + '<small>' + e.texte + '</small><div class="hint">' + e.indice + '</div></div>' +
+        '<div class="arrows"><button type="button" data-d="-1" aria-label="Monter">↑</button><button type="button" data-d="1" aria-label="Descendre">↓</button></div>';
+      liste.appendChild(li);
+    });
+    numeroter(); effacer();
+  }
+  liste.addEventListener('click', function(e){
+    var b = e.target.closest('.arrows button'); if (!b) return;
+    var li = b.closest('li');
+    if (b.dataset.d === '-1' && li.previousElementSibling) liste.insertBefore(li, li.previousElementSibling);
+    if (b.dataset.d === '1' && li.nextElementSibling) liste.insertBefore(li.nextElementSibling, li);
+    numeroter(); effacer();
   });
-  numeroter(); effacerCorrection();
-}
-liste.addEventListener('click', function(e){
-  var b = e.target.closest('.arrows button'); if (!b) return;
-  var li = b.closest('li');
-  if (b.dataset.d === '-1' && li.previousElementSibling) liste.insertBefore(li, li.previousElementSibling);
-  if (b.dataset.d === '1' && li.nextElementSibling) liste.insertBefore(li.nextElementSibling, li);
-  numeroter(); effacerCorrection();
-});
-// glisser-déposer (ordinateur)
-var tire = null;
-liste.addEventListener('dragstart', function(e){ tire = e.target.closest('li'); tire.classList.add('dragging'); });
-liste.addEventListener('dragend', function(){ if (tire) tire.classList.remove('dragging'); tire = null; numeroter(); effacerCorrection(); });
-liste.addEventListener('dragover', function(e){
-  e.preventDefault();
-  var cible = e.target.closest('li'); if (!tire || !cible || cible === tire) return;
-  var r = cible.getBoundingClientRect();
-  liste.insertBefore(tire, e.clientY > r.top + r.height / 2 ? cible.nextElementSibling : cible);
-});
-document.getElementById('ordre-verifier').addEventListener('click', function(){
-  var bons = 0;
-  liste.querySelectorAll('li').forEach(function(li, i){
-    var ok = Number(li.dataset.k) === i;
-    li.classList.toggle('ok', ok); li.classList.toggle('ko', !ok);
-    if (ok) bons++;
+  // glisser-déposer (ordinateur)
+  var tire = null;
+  liste.addEventListener('dragstart', function(e){ tire = e.target.closest('li'); tire.classList.add('dragging'); });
+  liste.addEventListener('dragend', function(){ if (tire) tire.classList.remove('dragging'); tire = null; numeroter(); effacer(); });
+  liste.addEventListener('dragover', function(e){
+    e.preventDefault();
+    var cible = e.target.closest('li'); if (!tire || !cible || cible === tire) return;
+    var r = cible.getBoundingClientRect();
+    liste.insertBefore(tire, e.clientY > r.top + r.height / 2 ? cible.nextElementSibling : cible);
   });
-  resOrdre.classList.toggle('bad', bons < 4);
-  resOrdre.textContent = bons === 4 ? 'Bravo, 4/4 ! Tu connais les étapes du service.'
-    : bons + '/4 étapes bien placées. Lis les indices en rouge et réessaie.';
-});
-document.getElementById('ordre-recommencer').addEventListener('click', nouvelOrdre);
-nouvelOrdre();
+  document.getElementById(opts.verifier).addEventListener('click', function(){
+    var bons = 0; essais++;
+    var cacher = essais < (opts.indicesDes || 1);
+    liste.querySelectorAll('li').forEach(function(li, i){
+      var ok = Number(li.dataset.k) === i;
+      li.classList.toggle('ok', ok); li.classList.toggle('ko', !ok);
+      li.classList.toggle('sans-indice', cacher);
+      if (ok) bons++;
+    });
+    res.classList.toggle('bad', bons < n);
+    res.textContent = bons === n
+      ? 'Bravo, ' + n + '/' + n + (essais === 1 ? ' du premier coup !' : ' !') + ' ' + opts.bravo
+      : bons + '/' + n + ' étapes bien placées. ' + (cacher ? 'Réessaie : les indices apparaîtront au prochain essai.' : 'Lis les indices en rouge et réessaie.');
+  });
+  document.getElementById(opts.recommencer).addEventListener('click', nouveau);
+  nouveau();
+}
+jeuOrdre({ liste: 'jeu-ordre', resultat: 'ordre-resultat', verifier: 'ordre-verifier', recommencer: 'ordre-recommencer',
+  etapes: ETAPES_SERVICE, bravo: 'Tu connais les étapes du service. Essaie le niveau expert !' });
+jeuOrdre({ liste: 'jeu-expert', resultat: 'expert-resultat', verifier: 'expert-verifier', recommencer: 'expert-recommencer',
+  etapes: ETAPES_SERVICE_EXPERT, indicesDes: 2, bravo: 'Tu maîtrises le déroulement complet du service.' });
 
-// ----- Jeu 2 : smash efficace ou pas -----
+// ----- Jeu 3 : smash efficace ou pas -----
 var tri = document.getElementById('jeu-tri');
 var resTri = document.getElementById('tri-resultat');
+var dernierTirage = [];
+function tirer(liste, nb){
+  // évite de reprendre les situations de la partie précédente quand c'est possible
+  var neuves = melanger(liste.filter(function(s){ return dernierTirage.indexOf(s) < 0; }));
+  var vues = melanger(liste.filter(function(s){ return dernierTirage.indexOf(s) >= 0; }));
+  return neuves.concat(vues).slice(0, nb);
+}
 function nouveauTri(){
+  var choix = melanger(
+    tirer(SITUATIONS_SMASH.filter(function(s){ return s.efficace; }), 3)
+      .concat(tirer(SITUATIONS_SMASH.filter(function(s){ return !s.efficace; }), 3)));
+  dernierTirage = choix;
   tri.innerHTML = '';
-  melanger(SITUATIONS_SMASH).forEach(function(s){
+  choix.forEach(function(s){
     var d = document.createElement('div');
     d.className = 'item'; d.dataset.bon = s.efficace ? 'oui' : 'non';
     d.innerHTML = photoHTML(s, s.texte) + '<p>' + s.texte + '</p>' +
@@ -524,8 +602,8 @@ document.getElementById('tri-verifier').addEventListener('click', function(){
   });
   resTri.classList.toggle('bad', bons < items.length);
   resTri.textContent = vides ? 'Il te reste ' + vides + ' situation(s) à classer.'
-    : bons === items.length ? 'Bravo, ' + bons + '/' + items.length + ' ! Tu connais les principes d\'efficacité du smash.'
-    : bons + '/' + items.length + ' bonnes réponses. Lis les explications et réessaie.';
+    : bons === items.length ? 'Bravo, ' + bons + '/' + items.length + ' ! Clique sur « Nouvelles situations » pour continuer.'
+    : bons + '/' + items.length + ' bonnes réponses. Lis les explications et corrige tes réponses.';
 });
 document.getElementById('tri-recommencer').addEventListener('click', nouveauTri);
 nouveauTri();
