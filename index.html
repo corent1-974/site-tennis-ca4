@@ -7,10 +7,13 @@
 <meta name="description" content="Site d'accompagnement EPS cycle 4 (CA4, tennis) : le service et le smash. Projet de Corentin Bernier et Tom Agnan.">
 <meta name="author" content="Corentin Bernier & Tom Agnan">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23D9E85B'/%3E%3Cpath d='M10 14c14 10 14 26 0 36M54 14c-14 10-14 26 0 36' fill='none' stroke='%23fff' stroke-width='4'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* Polices hébergées avec le site (licence SIL OFL 1.1) : aucun appel à Google */
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Fraunces;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/fraunces-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Fraunces;font-style:normal;font-weight:700;font-display:swap;src:url(fonts/fraunces-latin-700-normal.woff2) format('woff2')}
 :root{
   --ink:#16211C;--muted:#5B6A62;--court:#1F4D36;--court-2:#2E6A4C;--clay:#C2502F;--clay-2:#A23F22;
   --ball:#D9E85B;--cream:#F7F5EE;--paper:#FFFFFF;--line:#E3DFD2;--soft:#EEF3EF;
@@ -20,7 +23,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:Fraunces,Georgia,serif;color:var(--court);margin:0 0 .4em;line-height:1.15;letter-spacing:-.01em}
-a{color:var(--clay)}
+a{color:var(--clay-2)}
 img,video{max-width:100%;display:block;border-radius:12px}
 
 /* ----- En-tête + onglets ----- */
@@ -46,7 +49,7 @@ nav.tabs a.on{background:var(--ball);color:var(--court);font-weight:600}
 .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ball);box-shadow:0 0 0 2px var(--court)}
 h1{font-size:clamp(2rem,5vw,3rem)}
 h2{font-size:1.45rem;margin-top:2.6em;display:flex;align-items:center;gap:12px}
-h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(--clay);border:1.5px solid var(--clay);border-radius:999px;padding:2px 9px}
+h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(--clay-2);border:1.5px solid var(--clay-2);border-radius:999px;padding:2px 9px}
 .lede{font-size:1.15rem;color:var(--muted);max-width:62ch}
 
 /* ----- Accueil ----- */
@@ -59,7 +62,7 @@ h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(
 .hero > *{position:relative;z-index:1;max-width:560px}
 
 /* ----- Emplacements médias ----- */
-.placeholder{border:2px dashed #BDB59E;border-radius:14px;background:repeating-linear-gradient(45deg,#F2EFE5,#F2EFE5 10px,#EEEADF 10px,#EEEADF 20px);color:#7A7360;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px}
+.placeholder{border:2px dashed #BDB59E;border-radius:14px;background:repeating-linear-gradient(45deg,#F2EFE5,#F2EFE5 10px,#EEEADF 10px,#EEEADF 20px);color:#665F4C;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px}
 .video{aspect-ratio:16/9;width:100%}
 
 /* ----- Cartes & grilles ----- */
@@ -69,7 +72,7 @@ h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
 .card.link{transition:transform .15s,box-shadow .15s}
 .card.link:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(22,33,28,.06),0 16px 32px rgba(22,33,28,.1)}
-.tag{display:inline-block;font-size:.72rem;font-weight:600;color:var(--clay);background:#FBEDE7;border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;color:var(--clay-2);background:#FBEDE7;border-radius:999px;padding:3px 10px;margin-bottom:8px}
 .step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
 .step .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--court);color:#fff;font-size:.8rem;font-weight:600;margin-bottom:8px}
 .step h3{font-size:1rem;margin-bottom:4px}
@@ -104,7 +107,7 @@ h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(
 .arg p{text-align:justify;margin:0 0 1em}
 .keys{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
 .key{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-.key b{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--clay);margin-bottom:2px}
+.key b{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--clay-2);margin-bottom:2px}
 .key span{font-weight:600;font-size:.95rem}
 
 .sources ul{padding-left:1.2em}
@@ -159,13 +162,35 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
 .result{font-weight:600;color:var(--court);min-height:1.6em;margin:14px 0 0}
 .result.bad{color:var(--clay-2)}
 @media(max-width:600px){.sort{grid-template-columns:1fr}.order li .ph{display:none}}
+
+/* ----- Accessibilité : contour visible au clavier ----- */
+a:focus-visible,button:focus-visible,input:focus-visible,li:focus-visible{outline:3px solid var(--clay-2);outline-offset:2px}
+nav.tabs a:focus-visible,.brand:focus-visible{outline-color:var(--ball)}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--paper);color:var(--court);padding:8px 14px;border-radius:8px;z-index:50;font-weight:600}
+.skip:focus{left:8px}
+main:focus{outline:none}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ----- Pages légales ----- */
+.legal h2{font-size:1.2rem;margin-top:2em}
+.legal ul{padding-left:1.2em}
+.legal li{margin:.5em 0}
+.maj{color:var(--muted);font-size:.9rem}
+.table-wrap{overflow-x:auto}
+.legal table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;font-size:.9rem}
+.legal th,.legal td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.legal th{background:var(--soft);color:var(--court)}
+.legal code{font-size:.85em;background:var(--soft);padding:1px 5px;border-radius:4px}
+.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin-top:10px}
+.foot-links a{color:var(--muted)}
 </style>
 </head>
 <body>
 
+<a class="skip" href="#contenu">Aller au contenu</a>
 <header class="top">
   <div class="top-inner">
-    <button class="brand" data-p="accueil" aria-label="Retour à l'accueil"><span class="dot"></span>Tennis · CA4</button>
+    <button class="brand" data-p="accueil" aria-label="Retour à l'accueil"><span class="dot" aria-hidden="true"></span>Tennis · CA4</button>
     <nav class="tabs" aria-label="Onglets du site">
       <a href="#accueil" data-p="accueil" class="on">Accueil</a>
       <a href="#service" data-p="service">Apprentissage 1 · Le service</a>
@@ -177,7 +202,7 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
   </div>
 </header>
 
-<main>
+<main id="contenu" tabindex="-1">
 <!-- ================= ACCUEIL ================= -->
 <section id="accueil" class="page on"><div class="wrap">
   <div class="hero">
@@ -358,13 +383,137 @@ footer{text-align:center;font-size:.85rem;color:var(--muted);padding:36px 24px;b
     <li>Fiches techniques service / smash — sites spécialisés tennis</li>
   </ul>
 </div></section>
+<!-- ================= MENTIONS LÉGALES ================= -->
+<section id="mentions-legales" class="page"><div class="wrap legal">
+  <h1>Mentions légales</h1>
+  <p class="maj">Dernière mise à jour : 14 octobre 2026</p>
+
+  <h2>Éditeurs du site</h2>
+  <p>Ce site est édité par <strong>Corentin Bernier</strong> et <strong>Tom Agnan</strong>, étudiants, à titre <strong>non professionnel</strong>, dans le cadre d'un travail universitaire en STAPS (enseignement de TIC). Il est gratuit, sans publicité et sans but commercial.</p>
+  <p>Directeurs de la publication : Corentin Bernier et Tom Agnan.</p>
+  <p>Comme le permet la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN) aux personnes qui éditent un site à titre non professionnel, les éditeurs ne publient pas leurs coordonnées personnelles. L'hébergeur est indiqué ci-dessous.</p>
+  <p>Contact : en ouvrant un message (« Issue ») sur le <a href="https://github.com/corent1-974/site-tennis-ca4/issues" rel="noopener">dépôt GitHub du site</a>. Attention, ces messages sont publics : n'y indiquez pas d'informations personnelles.</p>
+
+  <h2>Hébergeur</h2>
+  <p>GitHub, Inc. (service GitHub Pages)<br>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br><a href="https://github.com" rel="noopener">github.com</a></p>
+
+  <h2>Conception du site</h2>
+  <p>Le code du site a été réalisé avec l'aide d'un assistant d'intelligence artificielle (Claude, de la société Anthropic). Les contenus pédagogiques ont été choisis, relus et validés par les éditeurs, qui en sont responsables.</p>
+
+  <h2>Propriété intellectuelle et crédits</h2>
+  <p>Les textes, exercices et la mise en page du site appartiennent à leurs auteurs (voir les <a href="#conditions" data-p="conditions">conditions d'utilisation</a>). Les textes officiels cités dans l'onglet Sources appartiennent à leurs auteurs respectifs.</p>
+  <p>Polices de caractères : Fraunces et Inter, sous licence SIL Open Font License 1.1, hébergées avec le site (aucun appel à un service extérieur).</p>
+
+  <h2>Accessibilité</h2>
+  <p>Le site a été conçu pour être lisible par tous : contrastes de couleurs vérifiés selon le niveau AA des règles internationales WCAG 2.1, textes alternatifs sur les images, navigation possible au clavier. Si vous rencontrez une difficulté, signalez-la-nous via le contact ci-dessus.</p>
+</div></section>
+
+<!-- ================= CONFIDENTIALITÉ ================= -->
+<section id="confidentialite" class="page"><div class="wrap legal">
+  <h1>Politique de confidentialité</h1>
+  <p class="maj">Dernière mise à jour : 14 octobre 2026</p>
+
+  <div class="callout green"><p style="margin:0"><strong>En résumé : ce site ne collecte aucune donnée personnelle.</strong> Il n'y a ni compte, ni formulaire, ni statistiques de visite, ni publicité, ni cookie, ni service de Google ou de réseau social.</p></div>
+
+  <h2>Les données que nous collectons</h2>
+  <p>Aucune. Les éditeurs du site ne reçoivent et ne conservent aucune information sur les visiteurs.</p>
+
+  <h2>Ce qui reste sur votre appareil</h2>
+  <ul>
+    <li><strong>Critères de réussite cochés</strong> (pages Service et Smash) : ils sont enregistrés dans la mémoire de votre navigateur (« stockage local ») pour que vous retrouviez votre progression. Ils ne quittent jamais votre appareil et ne nous sont jamais envoyés. Vous pouvez les effacer à tout moment depuis la <a href="#cookies" data-p="cookies">page Cookies</a>.</li>
+    <li><strong>Réponses aux mini-jeux</strong> (onglet Exercices) : elles sont corrigées directement dans votre navigateur et ne sont enregistrées nulle part. Elles disparaissent quand vous fermez la page.</li>
+  </ul>
+
+  <h2>Les données traitées par l'hébergeur</h2>
+  <p>Comme tout hébergeur, GitHub reçoit les informations techniques nécessaires pour afficher le site : votre <strong>adresse IP</strong>, le type de navigateur, la page demandée et l'heure de la demande. GitHub indique pouvoir conserver l'adresse IP des visiteurs des sites GitHub Pages, notamment pour la sécurité de son service.</p>
+  <p>Les éditeurs du site n'ont pas accès à ces données. GitHub, Inc. étant une société américaine, ces données peuvent être traitées aux États-Unis. Pour savoir comment GitHub les utilise, les protège et pour exercer vos droits auprès de lui, consultez la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">déclaration de confidentialité de GitHub</a>.</p>
+
+  <h2>Mineurs</h2>
+  <p>Le site s'adresse notamment à des élèves de collège. Comme aucune donnée n'est collectée, il peut être utilisé sans inscription ni autorisation particulière.</p>
+
+  <h2>Vos droits</h2>
+  <p>Le Règlement général sur la protection des données (RGPD) et la loi Informatique et Libertés vous donnent un droit d'accès, de rectification, d'effacement et d'opposition sur vos données. Les éditeurs ne détenant aucune donnée vous concernant, ces droits s'exercent auprès de GitHub pour les données techniques décrites ci-dessus. Vous pouvez aussi adresser une réclamation à la CNIL : <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>.</p>
+
+  <h2>Modification de cette politique</h2>
+  <p>Si le site évolue (par exemple ajout d'un formulaire ou de statistiques), cette page sera mise à jour avant le changement, et un consentement sera demandé si la loi l'exige.</p>
+</div></section>
+
+<!-- ================= COOKIES ================= -->
+<section id="cookies" class="page"><div class="wrap legal">
+  <h1>Politique des cookies</h1>
+  <p class="maj">Dernière mise à jour : 14 octobre 2026</p>
+
+  <div class="callout green"><p style="margin:0"><strong>Ce site n'utilise aucun cookie</strong> : pas de cookie de statistiques, de publicité ou de réseau social. C'est pourquoi aucun bandeau de consentement ne vous est demandé.</p></div>
+
+  <h2>La seule information enregistrée sur votre appareil</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Nom</th><th>Ce qu'il contient</th><th>Pourquoi</th><th>Durée</th></tr></thead>
+    <tbody>
+      <tr><td><code>criteres-service</code><br><code>criteres-smash</code></td><td>Les critères de réussite que vous avez cochés (oui / non)</td><td>Retrouver votre progression d'une visite à l'autre</td><td>Jusqu'à ce que vous l'effaciez</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Ces informations sont enregistrées dans le stockage local de votre navigateur, uniquement quand vous cochez une case. Elles ne sont jamais envoyées aux éditeurs ni à personne d'autre.</p>
+
+  <h2>Pourquoi aucun consentement n'est demandé</h2>
+  <p>La loi (article 82 de la loi Informatique et Libertés) impose de demander votre accord avant d'enregistrer des informations sur votre appareil, <strong>sauf</strong> lorsque c'est strictement nécessaire à un service que vous avez vous-même demandé. C'est le cas ici : l'enregistrement sert uniquement à conserver les cases que vous avez choisi de cocher. Il ne sert ni à vous suivre, ni à mesurer l'audience, ni à faire de la publicité.</p>
+
+  <h2>Effacer ces informations</h2>
+  <p>Cliquez sur ce bouton pour effacer immédiatement vos cases cochées sur cet appareil :</p>
+  <button class="btn" id="effacer-donnees" type="button">Effacer mes réponses enregistrées</button>
+  <p class="result" id="effacer-resultat" aria-live="polite"></p>
+  <p>Vous pouvez aussi les effacer depuis les réglages de votre navigateur (rubrique « Effacer les données de navigation » ou « Données de sites »).</p>
+</div></section>
+
+<!-- ================= CONDITIONS D'UTILISATION ================= -->
+<section id="conditions" class="page"><div class="wrap legal">
+  <h1>Conditions d'utilisation</h1>
+  <p class="maj">Dernière mise à jour : 14 octobre 2026</p>
+
+  <h2>1. Objet</h2>
+  <p>Ce site propose des contenus pédagogiques sur deux gestes du tennis (le service et le smash) pour accompagner les élèves de cycle 4 avant et après leurs séances d'EPS. En utilisant le site, vous acceptez les présentes conditions.</p>
+
+  <h2>2. Accès au site</h2>
+  <p>Le site est gratuit, accessible sans inscription et sans publicité. Rien n'y est vendu : il n'y a donc ni paiement, ni conditions de vente, ni politique de remboursement. Les éditeurs s'efforcent de le garder accessible mais ne peuvent pas garantir qu'il fonctionne en permanence et sans erreur.</p>
+
+  <h2>3. Pratique sportive et sécurité</h2>
+  <p>Les contenus du site sont des repères généraux. Ils <strong>ne remplacent pas</strong> les consignes de votre enseignant d'EPS. Pratiquez les gestes présentés pendant les séances encadrées, après un échauffement, et en respectant votre niveau et votre état de santé. En cas de douleur, arrêtez-vous et prévenez un adulte.</p>
+
+  <h2>4. Propriété intellectuelle</h2>
+  <p>Les textes, exercices, mini-jeux et la mise en page du site sont protégés par le droit d'auteur et appartiennent à Corentin Bernier et Tom Agnan. Vous pouvez les consulter et les utiliser pour votre usage personnel ou en classe. Toute autre reproduction ou diffusion, en tout ou partie, nécessite l'accord des auteurs, sauf les exceptions prévues par la loi (par exemple une courte citation en indiquant la source). Les textes officiels cités dans l'onglet Sources appartiennent à leurs auteurs respectifs.</p>
+
+  <h2>5. Liens vers d'autres sites</h2>
+  <p>Le site contient des liens vers d'autres sites (GitHub, CNIL…). Les éditeurs ne sont pas responsables de leur contenu.</p>
+
+  <h2>6. Responsabilité</h2>
+  <p>Les éditeurs font leur possible pour que les informations soient exactes, mais des erreurs peuvent subsister. Si vous en repérez une, signalez-la via le contact indiqué dans les <a href="#mentions-legales" data-p="mentions-legales">mentions légales</a>.</p>
+
+  <h2>7. Données personnelles</h2>
+  <p>Le site ne collecte aucune donnée personnelle. Voir la <a href="#confidentialite" data-p="confidentialite">politique de confidentialité</a> et la <a href="#cookies" data-p="cookies">politique des cookies</a>.</p>
+
+  <h2>8. Modification des conditions</h2>
+  <p>Ces conditions peuvent être modifiées. La date de mise à jour en haut de la page indique la dernière version.</p>
+
+  <h2>9. Droit applicable</h2>
+  <p>Ces conditions sont soumises au droit français.</p>
+</div></section>
+
 </main>
 
-<footer>Projet réalisé par Corentin Bernier &amp; Tom Agnan — Cycle 4, classe de 4ᵉ</footer>
+<footer>
+  Projet réalisé par Corentin Bernier &amp; Tom Agnan — Cycle 4, classe de 4ᵉ
+  <nav class="foot-links" aria-label="Informations légales">
+    <a href="#mentions-legales" data-p="mentions-legales">Mentions légales</a>
+    <a href="#confidentialite" data-p="confidentialite">Confidentialité</a>
+    <a href="#cookies" data-p="cookies">Cookies</a>
+    <a href="#conditions" data-p="conditions">Conditions d'utilisation</a>
+  </nav>
+</footer>
 
 <script>
 // Onglets : chaque page a sa propre adresse (#service, #smash…)
-var pages = ['accueil','service','smash','exercices','argumentaire','sources'];
+var pages = ['accueil','service','smash','exercices','argumentaire','sources','mentions-legales','confidentialite','cookies','conditions'];
 function show(id){
   if(pages.indexOf(id) < 0) id = 'accueil';
   document.querySelectorAll('.page').forEach(function(p){ p.classList.toggle('on', p.id === id); });
@@ -384,6 +533,11 @@ document.querySelectorAll('[data-p]').forEach(function(el){
 window.addEventListener('popstate', function(){ show(location.hash.slice(1)); });
 show(location.hash.slice(1));
 
+// Lien « Aller au contenu » : place le focus sur le contenu sans changer d'onglet
+document.querySelector('.skip').addEventListener('click', function(e){
+  e.preventDefault(); document.getElementById('contenu').focus();
+});
+
 // Auto-évaluation : les cases cochées sont gardées sur l'appareil de l'élève
 function load(k){ try { return JSON.parse(localStorage.getItem(k)) || []; } catch(e){ return []; } }
 function save(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
@@ -392,17 +546,17 @@ document.querySelectorAll('.checklist').forEach(function(list){
   var boxes = list.querySelectorAll('input');
   var prog = document.querySelector('.progress[data-for="'+list.dataset.list+'"]');
   var saved = load(key);
-  function update(){
+  function update(enregistrer){
     var done = 0, state = [];
     boxes.forEach(function(b){ state.push(b.checked); if(b.checked) done++; });
-    save(key, state);
+    if (enregistrer !== false) save(key, state);
     if(prog){
       prog.querySelector('i').style.width = (done / boxes.length * 100) + '%';
       prog.querySelector('span').textContent = done + ' / ' + boxes.length + (done === boxes.length ? ' — bravo !' : '');
     }
   }
-  boxes.forEach(function(b,i){ b.checked = !!saved[i]; b.addEventListener('change', update); });
-  update();
+  boxes.forEach(function(b,i){ b.checked = !!saved[i]; b.addEventListener('change', function(){ update(); }); });
+  update(false); // affichage seulement : rien n'est enregistré tant qu'on n'a pas coché
 });
 
 // ================= MINI-JEUX =================
@@ -483,7 +637,7 @@ var SITUATIONS_SMASH = [
 
 function photoHTML(item, label){
   return item.photo
-    ? '<div class="ph"><img src="' + item.photo + '" alt="' + label + '"></div>'
+    ? '<div class="ph"><img src="' + item.photo + '" alt="' + label.replace(/"/g, '&quot;') + '"></div>'
     : '<div class="ph placeholder">[PHOTO]</div>';
 }
 function melanger(t){
@@ -512,7 +666,7 @@ function jeuOrdre(opts){
       var e = opts.etapes[k];
       var li = document.createElement('li');
       li.draggable = true; li.dataset.k = k;
-      li.innerHTML = '<span class="pos"></span>' + photoHTML(e, e.titre || 'Étape du service') +
+      li.innerHTML = '<span class="pos"></span>' + photoHTML(e, 'Service : ' + (e.titre ? e.titre + ' — ' : '') + e.texte) +
         '<div class="txt">' + (e.titre ? '<b>' + e.titre + '</b>' : '') + '<small>' + e.texte + '</small><div class="hint">' + e.indice + '</div></div>' +
         '<div class="arrows"><button type="button" data-d="-1" aria-label="Monter">↑</button><button type="button" data-d="1" aria-label="Descendre">↓</button></div>';
       liste.appendChild(li);
@@ -577,7 +731,7 @@ function nouveauTri(){
   choix.forEach(function(s){
     var d = document.createElement('div');
     d.className = 'item'; d.dataset.bon = s.efficace ? 'oui' : 'non';
-    d.innerHTML = photoHTML(s, s.texte) + '<p>' + s.texte + '</p>' +
+    d.innerHTML = photoHTML(s, 'Smash : ' + s.texte) + '<p>' + s.texte + '</p>' +
       '<div class="choices"><button type="button" data-v="oui" aria-pressed="false">✅ Efficace</button>' +
       '<button type="button" data-v="non" aria-pressed="false">❌ Pas efficace</button></div>' +
       '<div class="why">' + s.pourquoi + '</div>';
@@ -607,6 +761,13 @@ document.getElementById('tri-verifier').addEventListener('click', function(){
 });
 document.getElementById('tri-recommencer').addEventListener('click', nouveauTri);
 nouveauTri();
+
+// ----- Page Cookies : effacer les cases cochées enregistrées sur l'appareil -----
+document.getElementById('effacer-donnees').addEventListener('click', function(){
+  document.querySelectorAll('.checklist input').forEach(function(b){ b.checked = false; b.dispatchEvent(new Event('change')); });
+  try { localStorage.removeItem('criteres-service'); localStorage.removeItem('criteres-smash'); } catch(e){}
+  document.getElementById('effacer-resultat').textContent = 'C\'est fait : vos réponses enregistrées sur cet appareil ont été effacées.';
+});
 </script>
 </body>
 </html>
