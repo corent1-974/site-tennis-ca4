@@ -6,7 +6,8 @@
 <title>Deux gestes, un projet de jeu — Tennis CA4</title>
 <meta name="description" content="Site d'accompagnement EPS cycle 4 (CA4, tennis) : le service et le smash. Projet de Corentin Bernier et Tom Agnan.">
 <meta name="author" content="Corentin Bernier & Tom Agnan">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23D9E85B'/%3E%3Cpath d='M10 14c14 10 14 26 0 36M54 14c-14 10-14 26 0 36' fill='none' stroke='%23fff' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="img/logo-64.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <style>
 /* Polices hébergées avec le site (licence SIL OFL 1.1) : aucun appel à Google */
 @font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format('woff2')}
@@ -29,11 +30,8 @@ img,video{max-width:100%;display:block;border-radius:12px}
 /* ----- En-tête + onglets ----- */
 header.top{position:sticky;top:0;z-index:20;background:var(--court);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.12)}
 .top-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:12px 24px}
+.brand .logo{width:36px;height:36px;border-radius:50%;flex:none}
 .brand{display:flex;align-items:center;gap:10px;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:1.05rem;white-space:nowrap;color:#fff;background:none;border:0;cursor:pointer;padding:0}
-.brand .dot{width:26px;height:26px;border-radius:50%;background:var(--ball);position:relative;flex:none}
-.brand .dot::before,.brand .dot::after{content:"";position:absolute;top:3px;bottom:3px;width:10px;border:2px solid #fff;border-radius:50%}
-.brand .dot::before{left:-5px;border-left-color:transparent;border-top-color:transparent;border-bottom-color:transparent}
-.brand .dot::after{right:-5px;border-right-color:transparent;border-top-color:transparent;border-bottom-color:transparent}
 nav.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
 nav.tabs::-webkit-scrollbar{display:none}
 nav.tabs a{color:#E6EEE9;text-decoration:none;font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:999px;white-space:nowrap;transition:background .15s}
@@ -190,7 +188,7 @@ main:focus{outline:none}
 <a class="skip" href="#contenu">Aller au contenu</a>
 <header class="top">
   <div class="top-inner">
-    <button class="brand" data-p="accueil" aria-label="Retour à l'accueil"><span class="dot" aria-hidden="true"></span>Tennis · CA4</button>
+    <button class="brand" data-p="accueil" aria-label="Retour à l'accueil"><img class="logo" src="img/logo-192.png" alt="" width="36" height="36">Tennis · CA4</button>
     <nav class="tabs" aria-label="Onglets du site">
       <a href="#accueil" data-p="accueil" class="on">Accueil</a>
       <a href="#service" data-p="service">Apprentissage 1 · Le service</a>
@@ -402,6 +400,7 @@ main:focus{outline:none}
 
   <h2>Propriété intellectuelle et crédits</h2>
   <p>Les textes, exercices et la mise en page du site appartiennent à leurs auteurs (voir les <a href="#conditions" data-p="conditions">conditions d'utilisation</a>). Les textes officiels cités dans l'onglet Sources appartiennent à leurs auteurs respectifs.</p>
+  <p>Logo : réalisé par les éditeurs avec l'outil en ligne Canva.</p>
   <p>Polices de caractères : Fraunces et Inter, sous licence SIL Open Font License 1.1, hébergées avec le site (aucun appel à un service extérieur).</p>
 
   <h2>Accessibilité</h2>
