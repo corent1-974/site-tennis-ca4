@@ -62,6 +62,20 @@ h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(
 /* ----- Emplacements médias ----- */
 .placeholder{border:2px dashed #BDB59E;border-radius:14px;background:repeating-linear-gradient(45deg,#F2EFE5,#F2EFE5 10px,#EEEADF 10px,#EEEADF 20px);color:#665F4C;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px}
 .video{aspect-ratio:16/9;width:100%}
+/* Vidéos filmées (format portrait, sans son) et photos tirées des vidéos */
+.media{margin:0}
+.media video{width:100%;height:auto;background:var(--court)}
+.media video.portrait{width:auto;max-width:100%;height:min(70vh,560px);margin:0 auto}
+.kit{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kit li{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.kit li::before{content:"";flex:none;width:10px;height:10px;margin-top:8px;border-radius:50%;background:var(--ball);box-shadow:0 0 0 2px var(--court)}
+.auteur{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.jeu-auteur{font-size:.85rem;color:var(--muted);margin:-6px 0 12px}
+.bilan{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;margin-top:14px}
+@media(max-width:600px){.kit{grid-template-columns:1fr}}
+.media figcaption{text-align:center;font-size:.85rem;color:var(--muted);margin-top:10px}
+.step img{width:100%;aspect-ratio:3/4;object-fit:cover;margin-bottom:12px}
+.card img.cover{width:100%;height:160px;object-fit:cover;object-position:center 35%;margin-bottom:16px}
 
 /* ----- Cartes & grilles ----- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -195,7 +209,7 @@ main:focus{outline:none}
       <a href="#smash" data-p="smash">Apprentissage 2 · Le smash</a>
       <a href="#exercices" data-p="exercices">Exercices</a>
       <a href="#argumentaire" data-p="argumentaire">Argumentaire</a>
-      <a href="#sources" data-p="sources">Sources</a>
+      <a href="#sources" data-p="sources">Sources &amp; bilan</a>
     </nav>
   </div>
 </header>
@@ -210,19 +224,39 @@ main:focus{outline:none}
     <a class="btn" href="#service" data-p="service">Commencer par le service →</a>
   </div>
 
-  <div class="placeholder video" style="margin-top:28px">[ VIDÉO — extrait d'un point de tennis filmé, à insérer ici ]</div>
+  <figure class="media" style="margin-top:28px">
+    <video controls muted loop playsinline preload="metadata" width="1280" height="720" poster="media/gestes-poster.jpg" aria-label="Les deux gestes du site : un service, puis un smash">
+      <source src="media/gestes.mp4" type="video/mp4">
+      Ton navigateur ne peut pas lire cette vidéo. <a href="media/gestes.mp4">Télécharger la vidéo (MP4)</a>.
+    </video>
+    <figcaption>Les deux gestes du site en action : un service pour engager le point, puis un smash pour le conclure. Vidéo sans son.</figcaption>
+  </figure>
+
+  <h2>Le tennis en EPS</h2>
+  <p>Le tennis est un sport d'<strong>opposition duelle</strong> : deux joueurs s'affrontent de chaque côté d'un filet. Le but est de faire rebondir la balle dans le terrain adverse de façon à ce que l'adversaire ne puisse pas la renvoyer. En EPS, il fait partie du champ d'apprentissage 4 : <em>« Conduire et maîtriser un affrontement collectif ou interindividuel »</em>.</p>
+  <p>Pendant ce cycle, tu travailles deux gestes clés : le <strong>service</strong>, pour engager et construire ton point, et le <strong>smash</strong>, pour le conclure sur une balle haute.</p>
+
+  <h2>Le matériel à prévoir</h2>
+  <ul class="kit">
+    <li><span><strong>Une tenue de sport</strong> adaptée à la météo (survêtement, sweat : on joue dehors).</span></li>
+    <li><span><strong>Des chaussures de sport</strong> bien lacées, qui tiennent le pied.</span></li>
+    <li><span><strong>Une bouteille d'eau</strong> : on s'hydrate entre les exercices.</span></li>
+    <li><span><strong>Raquettes et balles</strong> : prêtées par le collège. Si tu as ta raquette, tu peux l'apporter.</span></li>
+    <li><span><strong>Un téléphone, une tablette ou un ordinateur</strong> pour consulter ce site avant et après la séance.</span></li>
+    <li><span><strong>Des cheveux attachés</strong> et pas de bijoux qui gênent pendant le jeu.</span></li>
+  </ul>
 
   <h2>Choisis ton apprentissage</h2>
   <div class="grid2">
     <div class="card link">
-      <div class="placeholder" style="height:160px;margin-bottom:16px">[ IMAGE — joueur au service ]</div>
+      <img class="cover" src="media/service-carte.jpg" width="480" height="360" alt="Joueur au service en position du trophée : bras libre tendu vers le ciel, raquette armée derrière l'épaule" loading="lazy">
       <span class="tag">Apprentissage 1</span>
       <h3>Le service</h3>
       <p style="margin:0;color:var(--muted)">Construire son projet de jeu dès l'engagement.</p>
       <a class="btn" href="#service" data-p="service">Découvrir</a>
     </div>
     <div class="card link">
-      <div class="placeholder" style="height:160px;margin-bottom:16px">[ IMAGE — joueur au smash ]</div>
+      <img class="cover" src="media/smash-carte.jpg" width="480" height="360" alt="Joueur sous une balle haute, bras libre pointé vers la balle et raquette armée, prêt à smasher" loading="lazy">
       <span class="tag">Apprentissage 2</span>
       <h3>Le smash</h3>
       <p style="margin:0;color:var(--muted)">Appliquer les principes d'efficacité pour conclure le point.</p>
@@ -245,14 +279,21 @@ main:focus{outline:none}
   <p class="lede">Le service est le premier coup du point : bien maîtrisé, il permet de prendre l'avantage dès l'engagement.</p>
 
   <h2><span class="num">01</span>Regarde le geste</h2>
-  <div class="placeholder video">[ VIDÉO — service complet, filmé de face puis de profil, au ralenti ]</div>
+  <figure class="media">
+    <video controls playsinline preload="metadata" width="1280" height="720" poster="media/service-explication-poster.jpg" aria-label="Vidéo commentée : comment réussir son service, en trois étapes">
+      <source src="media/service-explication.mp4" type="video/mp4">
+      <track kind="subtitles" src="media/service-explication.vtt" srclang="fr" label="Français">
+      Ton navigateur ne peut pas lire cette vidéo. <a href="media/service-explication.mp4">Télécharger la vidéo (MP4)</a>.
+    </video>
+    <figcaption>Vidéo commentée (2 min 23) : le lancer, l'armé, la frappe, avec ce qu'il ne faut pas faire à chaque étape. Sous-titres disponibles dans le lecteur.</figcaption>
+  </figure>
 
   <h2><span class="num">02</span>Décompose le geste</h2>
   <div class="grid4">
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">1</span><h3>Position</h3><p>Profil au filet, pied avant pointé vers le poteau opposé.</p></div>
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">2</span><h3>Armé</h3><p>Bras de lancer tendu, coude de frappe fléchi sous l'épaule.</p></div>
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">3</span><h3>Frappe</h3><p>Extension du bras, contact au-dessus de la tête.</p></div>
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">4</span><h3>Accompagnement</h3><p>Le geste se poursuit, retour en position d'attente.</p></div>
+    <div class="step"><img src="media/service-1-position.jpg" width="360" height="480" alt="Position : le joueur est placé de profil, raquette vers le bas. Annotations : balle au bout des doigts, pieds écartés et bien stables" loading="lazy"><span class="n">1</span><h3>Position</h3><p>Profil au filet, pied avant pointé vers le poteau opposé.</p></div>
+    <div class="step"><img src="media/service-2-arme.jpg" width="360" height="480" alt="Armé : position du trophée. Annotations : bras libre tendu, raquette armée derrière l'épaule, genoux fléchis" loading="lazy"><span class="n">2</span><h3>Armé</h3><p>Bras de lancer tendu, coude de frappe fléchi sous l'épaule.</p></div>
+    <div class="step"><img src="media/service-3-frappe.jpg" width="360" height="480" alt="Frappe : instant du contact. Annotations : contact tout en haut, bras tendu, sur la pointe des pieds" loading="lazy"><span class="n">3</span><h3>Frappe</h3><p>Extension du bras, contact au-dessus de la tête.</p></div>
+    <div class="step"><img src="media/service-4-accompagnement.jpg" width="360" height="480" alt="Accompagnement : fin du geste. Annotations : la raquette finit de l'autre côté, je retombe sur le pied avant" loading="lazy"><span class="n">4</span><h3>Accompagnement</h3><p>Le geste se poursuit, retour en position d'attente.</p></div>
   </div>
 
   <h2><span class="num">03</span>Critères de réussite</h2>
@@ -268,6 +309,8 @@ main:focus{outline:none}
   <div class="callout"><p style="margin:0"><strong>Lancer irrégulier ou trop en arrière</strong> → la frappe se fait trop tard, la balle part souvent dans le filet. <strong>Correction :</strong> s'entraîner au lancer seul, sans raquette, jusqu'à ce qu'il retombe toujours au même endroit.</p></div>
 
   <a class="btn" href="#exercices" data-p="exercices">Voir les exercices du service →</a>
+
+  <p class="auteur">Page réalisée par <strong>Corentin Bernier</strong> (tournage, voix off, montage, images annotées et jeux du service).</p>
 </div></section>
 
 <!-- ================= SMASH ================= -->
@@ -277,14 +320,20 @@ main:focus{outline:none}
   <p class="lede">Le smash se joue au-dessus de la tête, sur une balle haute de l'adversaire. Il n'a de sens que relié à une bonne intention tactique : conclure le point.</p>
 
   <h2><span class="num">01</span>Regarde le geste</h2>
-  <div class="placeholder video">[ VIDÉO — smash complet, filmé de profil, au ralenti ]</div>
+  <figure class="media">
+    <video class="portrait" controls muted loop playsinline preload="metadata" width="540" height="720" poster="media/smash-poster.jpg" aria-label="Smash complet à vitesse normale, puis l'armé et la frappe au ralenti">
+      <source src="media/smash.mp4" type="video/mp4">
+      Ton navigateur ne peut pas lire cette vidéo. <a href="media/smash.mp4">Télécharger la vidéo (MP4)</a>.
+    </video>
+    <figcaption>Le smash en entier à vitesse normale (le joueur recule sous la balle, frappe, puis avance vers le filet), puis l'armé et la frappe repassés au ralenti. Vidéo sans son.</figcaption>
+  </figure>
 
   <h2><span class="num">02</span>Décompose le geste</h2>
   <div class="grid4">
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">1</span><h3>Placement</h3><p>Je me mets de profil en pas chassés pour me placer sous la balle.</p></div>
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">2</span><h3>Armé</h3><p>Bras libre pointé vers la balle, raquette armée derrière la tête.</p></div>
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">3</span><h3>Frappe</h3><p>Contact haut, bras tendu, légèrement devant le corps.</p></div>
-    <div class="step"><div class="placeholder" style="height:90px;margin-bottom:12px">[IMAGE]</div><span class="n">4</span><h3>Transfert</h3><p>Le poids du corps accompagne la balle vers l'avant et le bas.</p></div>
+    <div class="step"><img src="media/smash-1-placement.jpg" width="360" height="480" alt="Placement : le joueur recule sous la balle, de profil, le bras libre déjà levé vers elle" loading="lazy"><span class="n">1</span><h3>Placement</h3><p>Je me mets de profil en pas chassés pour me placer sous la balle.</p></div>
+    <div class="step"><img src="media/smash-2-arme.jpg" width="360" height="480" alt="Armé : bras libre tendu qui pointe la balle, raquette armée derrière la tête, jambes fléchies" loading="lazy"><span class="n">2</span><h3>Armé</h3><p>Bras libre pointé vers la balle, raquette armée derrière la tête.</p></div>
+    <div class="step"><img src="media/smash-3-frappe.jpg" width="360" height="480" alt="Frappe : le joueur saute et frappe la balle haut et devant lui, bras de frappe tendu" loading="lazy"><span class="n">3</span><h3>Frappe</h3><p>Contact haut, bras tendu, légèrement devant le corps.</p></div>
+    <div class="step"><img src="media/smash-4-transfert.jpg" width="360" height="480" alt="Transfert : la raquette termine vers le bas de l'autre côté du corps, le joueur retombe vers l'avant" loading="lazy"><span class="n">4</span><h3>Transfert</h3><p>Le poids du corps accompagne la balle vers l'avant et le bas.</p></div>
   </div>
 
   <h2><span class="num">03</span>Critères de réussite</h2>
@@ -300,6 +349,8 @@ main:focus{outline:none}
   <div class="callout green"><p style="margin:0">Le smash sert à <strong>finir le point</strong> après une balle haute et courte de l'adversaire (lob raté). On privilégie le <strong>placement</strong> loin de l'adversaire plutôt que la puissance pure : un smash bien placé gagne plus souvent qu'un smash très fort au centre.</p></div>
 
   <a class="btn" href="#exercices" data-p="exercices">Voir les exercices du smash →</a>
+
+  <p class="auteur">Page réalisée par <strong>Tom Agnan</strong>.</p>
 </div></section>
 
 <!-- ================= EXERCICES ================= -->
@@ -308,6 +359,7 @@ main:focus{outline:none}
   <p class="lede">Des mini-jeux pour vérifier que tu as bien compris chaque geste avant de le reproduire en séance. Tu peux recommencer autant de fois que tu veux.</p>
 
   <h2><span class="num">01</span>Le service : remets les étapes dans l'ordre</h2>
+  <p class="jeu-auteur">Jeu réalisé par Corentin Bernier</p>
   <p class="consigne">Les 4 étapes du service sont mélangées. Fais-les glisser (ou utilise les flèches ↑ ↓) pour les remettre dans l'ordre, puis clique sur <strong>Vérifier</strong>.</p>
   <ol class="order" id="jeu-ordre"></ol>
   <div class="game-actions">
@@ -317,6 +369,7 @@ main:focus{outline:none}
   <p class="result" id="ordre-resultat" aria-live="polite"></p>
 
   <h2><span class="num">02</span>Le service, niveau expert : 8 étapes sans les noms</h2>
+  <p class="jeu-auteur">Jeu réalisé par Corentin Bernier</p>
   <p class="consigne">Plus difficile : le service est découpé en <strong>8 étapes</strong> et leurs noms sont cachés. Lis bien chaque description et remets-les dans l'ordre. Les indices n'apparaissent qu'à partir du <strong>2ᵉ essai</strong>.</p>
   <ol class="order" id="jeu-expert"></ol>
   <div class="game-actions">
@@ -326,6 +379,7 @@ main:focus{outline:none}
   <p class="result" id="expert-resultat" aria-live="polite"></p>
 
   <h2><span class="num">03</span>Le smash : efficace ou pas efficace ?</h2>
+  <p class="jeu-auteur">Jeu réalisé par Tom Agnan</p>
   <p class="consigne">Pour chaque situation, choisis si le smash est <strong>efficace</strong> ou <strong>pas efficace</strong>, puis clique sur <strong>Vérifier</strong>. Quand tu as tout bon, clique sur <strong>Nouvelles situations</strong> : 6 nouvelles situations sont tirées au sort parmi 18.</p>
   <div class="sort" id="jeu-tri"></div>
   <div class="game-actions">
@@ -364,7 +418,7 @@ main:focus{outline:none}
 
 <!-- ================= SOURCES ================= -->
 <section id="sources" class="page"><div class="wrap sources">
-  <h1>Sources</h1>
+  <h1>Sources et bilan</h1>
   <h2>Textes institutionnels</h2>
   <ul>
     <li>Programme d'EPS cycle 4 — BO n°31 du 30 juillet 2020 (BOEN spécial n°11 du 26 novembre 2015)</li>
@@ -380,11 +434,47 @@ main:focus{outline:none}
   <ul>
     <li>Fiches techniques service / smash — sites spécialisés tennis</li>
   </ul>
+
+  <h2>Provenance des images et des vidéos</h2>
+  <ul>
+    <li><strong>Vidéos et photos</strong> : toutes filmées par nous (Corentin Bernier et Tom Agnan), sur un court de tennis extérieur, en novembre 2026. Les personnes filmées sont les auteurs du site. Les images fixes des étapes sont extraites de nos vidéos.</li>
+    <li><strong>Logo</strong> : réalisé par nous avec Canva.</li>
+    <li><strong>Polices</strong> : Fraunces et Inter (licence libre SIL Open Font License), hébergées avec le site.</li>
+    <li>Aucune image ou vidéo n'a été récupérée sur Internet.</li>
+  </ul>
+
+  <h2>Captation, montage et outils</h2>
+  <p>Avec l'accord de notre enseignant, nous avons relevé le défi de réaliser le site et les montages avec une intelligence artificielle, à la place des logiciels vus en TD (OpenShot, iMovie, VideoPad, Skitch…).</p>
+  <ul>
+    <li><strong>Captation</strong> : vidéos filmées au smartphone, puis transférées sur l'ordinateur. Voix off enregistrée en mémo vocal sur le téléphone.</li>
+    <li><strong>Tri des vidéos</strong> : nous avons trié nous-mêmes les vidéos et gardé uniquement les meilleures prises.</li>
+    <li><strong>Montage</strong> : réalisé avec Claude (assistant d'intelligence artificielle d'Anthropic), qui pilote le logiciel libre FFmpeg. Nous avons choisi les passages, demandé les coupes, les ralentis, les arrêts sur image et les titres, puis vérifié et fait corriger le résultat (par exemple : arrêts sur image recalés au moment exact du contact balle-raquette).</li>
+    <li><strong>Voix off</strong> : texte (« spitch ») construit à partir de nos critères de réussite, puis lu et enregistré par chacun pour sa page. Les prises ratées ont été repérées grâce à une transcription automatique (Whisper, sur l'ordinateur), puis retirées.</li>
+    <li><strong>Images annotées</strong> : flèches et repères ajoutés sur les images des étapes avec FFmpeg.</li>
+    <li><strong>Site</strong> : codé en HTML, CSS et JavaScript avec l'aide de Claude, hébergé sur GitHub Pages. Les mini-jeux sont codés directement dans le site (équivalent de LearningApps), sans compte ni service extérieur.</li>
+  </ul>
+
+  <h2>Organisation du binôme</h2>
+  <ul>
+    <li><strong>Corentin Bernier</strong> : apprentissage 1, le service (tournage, voix off, montage de la vidéo, images annotées, jeux du service).</li>
+    <li><strong>Tom Agnan</strong> : apprentissage 2, le smash (tournage, voix off, montage de la vidéo, jeu du smash).</li>
+    <li><strong>En commun</strong> : choix de l'activité et des gestes, page d'accueil, charte graphique et logo, argumentaire, sources.</li>
+  </ul>
+
+  <h2>Bilan personnel</h2>
+  <div class="bilan">
+    <h3>Corentin Bernier</h3>
+    <p>[À rédiger par Corentin : ce que j'ai appris, les difficultés rencontrées, ce que l'IA m'a apporté et ses limites, ce que je ferais autrement.]</p>
+  </div>
+  <div class="bilan">
+    <h3>Tom Agnan</h3>
+    <p>[À rédiger par Tom : ce que j'ai appris, les difficultés rencontrées, ce que l'IA m'a apporté et ses limites, ce que je ferais autrement.]</p>
+  </div>
 </div></section>
 <!-- ================= MENTIONS LÉGALES ================= -->
 <section id="mentions-legales" class="page"><div class="wrap legal">
   <h1>Mentions légales</h1>
-  <p class="maj">Dernière mise à jour : 14 octobre 2026</p>
+  <p class="maj">Dernière mise à jour : 19 novembre 2026</p>
 
   <h2>Éditeurs du site</h2>
   <p>Ce site est édité par <strong>Corentin Bernier</strong> et <strong>Tom Agnan</strong>, étudiants, à titre <strong>non professionnel</strong>, dans le cadre d'un travail universitaire en STAPS (enseignement de TIC). Il est gratuit, sans publicité et sans but commercial.</p>
@@ -396,15 +486,16 @@ main:focus{outline:none}
   <p>GitHub, Inc. (service GitHub Pages)<br>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br><a href="https://github.com" rel="noopener">github.com</a></p>
 
   <h2>Conception du site</h2>
-  <p>Le code du site a été réalisé avec l'aide d'un assistant d'intelligence artificielle (Claude, de la société Anthropic). Les contenus pédagogiques ont été choisis, relus et validés par les éditeurs, qui en sont responsables.</p>
+  <p>Le code du site et le montage des vidéos ont été réalisés avec l'aide d'un assistant d'intelligence artificielle (Claude, de la société Anthropic), avec l'accord de l'enseignant. Les contenus pédagogiques, les vidéos et les voix off ont été choisis, réalisés, relus et validés par les éditeurs, qui en sont responsables.</p>
 
   <h2>Propriété intellectuelle et crédits</h2>
   <p>Les textes, exercices et la mise en page du site appartiennent à leurs auteurs (voir les <a href="#conditions" data-p="conditions">conditions d'utilisation</a>). Les textes officiels cités dans l'onglet Sources appartiennent à leurs auteurs respectifs.</p>
   <p>Logo : réalisé par les éditeurs avec l'outil en ligne Canva.</p>
+  <p>Vidéos, photos et voix off : réalisées par les éditeurs et hébergées avec le site (aucun lecteur ni service extérieur).</p>
   <p>Polices de caractères : Fraunces et Inter, sous licence SIL Open Font License 1.1, hébergées avec le site (aucun appel à un service extérieur).</p>
 
   <h2>Accessibilité</h2>
-  <p>Le site a été conçu pour être lisible par tous : contrastes de couleurs vérifiés selon le niveau AA des règles internationales WCAG 2.1, textes alternatifs sur les images, navigation possible au clavier. Si vous rencontrez une difficulté, signalez-la-nous via le contact ci-dessus.</p>
+  <p>Le site a été conçu pour être lisible par tous : contrastes de couleurs vérifiés selon le niveau AA des règles internationales WCAG 2.1, textes alternatifs sur les images, sous-titres sur la vidéo commentée, navigation possible au clavier. Si vous rencontrez une difficulté, signalez-la-nous via le contact ci-dessus.</p>
 </div></section>
 
 <!-- ================= CONFIDENTIALITÉ ================= -->
@@ -564,13 +655,13 @@ document.querySelectorAll('.checklist').forEach(function(list){
 
 // Jeu 1 : service, 4 étapes (dans le bon ordre)
 var ETAPES_SERVICE = [
-  { titre: 'Position', texte: 'Profil au filet, pied avant pointé vers le poteau opposé.', photo: '',
+  { titre: 'Position', texte: 'Profil au filet, pied avant pointé vers le poteau opposé.', photo: 'media/service-1-position.jpg',
     indice: 'On commence toujours par se placer avant de bouger les bras.' },
-  { titre: 'Armé', texte: 'Bras de lancer tendu, coude de frappe fléchi sous l\'épaule.', photo: '',
+  { titre: 'Armé', texte: 'Bras de lancer tendu, coude de frappe fléchi sous l\'épaule.', photo: 'media/service-2-arme.jpg',
     indice: 'On lance la balle et on prépare la raquette avant de frapper.' },
-  { titre: 'Frappe', texte: 'Extension du bras, contact au-dessus de la tête.', photo: '',
+  { titre: 'Frappe', texte: 'Extension du bras, contact au-dessus de la tête.', photo: 'media/service-3-frappe.jpg',
     indice: 'La frappe vient juste après l\'armé, quand la balle est en haut.' },
-  { titre: 'Accompagnement', texte: 'Le geste se poursuit, retour en position d\'attente.', photo: '',
+  { titre: 'Accompagnement', texte: 'Le geste se poursuit, retour en position d\'attente.', photo: 'media/service-4-accompagnement.jpg',
     indice: 'L\'accompagnement termine le geste : c\'est la dernière étape.' }
 ];
 

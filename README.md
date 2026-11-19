@@ -15,6 +15,21 @@ Projet de Corentin Bernier & Tom Agnan.
 2. Dans `index.html`, cherchez `ETAPES_SERVICE` (service) ou `SITUATIONS_SMASH` (smash)
    et remplacez `photo: ''` par `photo: 'service-1.jpg'` sur la bonne ligne.
 
+## Vidéos et photos (dossier `media/`)
+
+- Toutes les vidéos et images viennent de nos propres vidéos. Les vidéos des pages sont en paysage (1280×720) :
+  vidéo verticale au centre, fond flouté sur les côtés.
+- `service-explication.mp4` (page Service) : vidéo commentée par Corentin (2 min 23, 6,6 Mo), avec arrêts sur
+  image et ralentis calés sur la voix. Sous-titres dans `service-explication.vtt` (désactivés par défaut,
+  activables dans le lecteur).
+- `gestes.mp4` (accueil : un service puis un smash) et `smash.mp4` (page Smash) :
+  montées à partir de nos vidéos, coupées, ralenti ×2,5 sur la frappe, sans son, H.264 (environ 0,5 à 0,7 Mo
+  chacune). Une image d'affiche `*-poster.jpg` s'affiche avant la lecture.
+- `service-1-position.jpg` … `service-4-accompagnement.jpg` et `smash-1-placement.jpg` … `smash-4-transfert.jpg` :
+  images fixes des étapes. Celles du service servent aussi au mini-jeu « remets les étapes dans l'ordre ».
+  `service-carte.jpg` et `smash-carte.jpg` : cartes de l'accueil.
+- Les vidéos ne se lancent pas toutes seules (lecture avec les contrôles, en boucle, sans son).
+
 ## Avant d'ajouter des photos ou des vidéos
 
 - **Texte alternatif** : chaque image doit avoir une description (attribut `alt`). Dans les mini-jeux, elle est
