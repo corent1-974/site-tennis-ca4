@@ -74,13 +74,15 @@ h2 .num{font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;color:var(
 .bilan{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;margin-top:14px}
 @media(max-width:600px){.kit{grid-template-columns:1fr}}
 .media figcaption{text-align:center;font-size:.85rem;color:var(--muted);margin-top:10px}
-.step img{width:100%;aspect-ratio:3/4;object-fit:cover;margin-bottom:12px}
+.step img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;margin-bottom:12px}
 .card img.cover{width:100%;height:160px;object-fit:cover;object-position:center 35%;margin-bottom:16px}
 
 /* ----- Cartes & grilles ----- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.grid4.etapes{grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:600px){.grid4.etapes{grid-template-columns:1fr}}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
 .card.link{transition:transform .15s,box-shadow .15s}
 .card.link:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(22,33,28,.06),0 16px 32px rgba(22,33,28,.1)}
@@ -289,7 +291,7 @@ main:focus{outline:none}
   </figure>
 
   <h2><span class="num">02</span>Décompose le geste</h2>
-  <div class="grid4">
+  <div class="grid4 etapes">
     <div class="step"><img src="media/service-1-position.jpg" width="360" height="480" alt="Position : le joueur est placé de profil, raquette vers le bas. Annotations : balle au bout des doigts, pieds écartés et bien stables" loading="lazy"><span class="n">1</span><h3>Position</h3><p>Profil au filet, pied avant pointé vers le poteau opposé.</p></div>
     <div class="step"><img src="media/service-2-arme.jpg" width="360" height="480" alt="Armé : position du trophée. Annotations : bras libre tendu, raquette armée derrière l'épaule, genoux fléchis" loading="lazy"><span class="n">2</span><h3>Armé</h3><p>Bras de lancer tendu, coude de frappe fléchi sous l'épaule.</p></div>
     <div class="step"><img src="media/service-3-frappe.jpg" width="360" height="480" alt="Frappe : instant du contact. Annotations : contact tout en haut, bras tendu, sur la pointe des pieds" loading="lazy"><span class="n">3</span><h3>Frappe</h3><p>Extension du bras, contact au-dessus de la tête.</p></div>
@@ -329,7 +331,7 @@ main:focus{outline:none}
   </figure>
 
   <h2><span class="num">02</span>Décompose le geste</h2>
-  <div class="grid4">
+  <div class="grid4 etapes">
     <div class="step"><img src="media/smash-1-placement.jpg" width="360" height="480" alt="Placement : le joueur recule sous la balle, de profil, le bras libre déjà levé vers elle" loading="lazy"><span class="n">1</span><h3>Placement</h3><p>Je me mets de profil en pas chassés pour me placer sous la balle.</p></div>
     <div class="step"><img src="media/smash-2-arme.jpg" width="360" height="480" alt="Armé : bras libre tendu qui pointe la balle, raquette armée derrière la tête, jambes fléchies" loading="lazy"><span class="n">2</span><h3>Armé</h3><p>Bras libre pointé vers la balle, raquette armée derrière la tête.</p></div>
     <div class="step"><img src="media/smash-3-frappe.jpg" width="360" height="480" alt="Frappe : le joueur saute et frappe la balle haut et devant lui, bras de frappe tendu" loading="lazy"><span class="n">3</span><h3>Frappe</h3><p>Contact haut, bras tendu, légèrement devant le corps.</p></div>
